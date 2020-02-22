@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImgRocket</string>
+    <string name="test">test</string>
+    <string name="photo_permission">We need your photo permission</string>
+</resources>
