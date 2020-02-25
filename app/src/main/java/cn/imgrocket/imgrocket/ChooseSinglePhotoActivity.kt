@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,6 +13,11 @@ import android.provider.MediaStore
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_choose_single_photo.*
 import pub.devrel.easypermissions.EasyPermissions
+import android.net.Uri.withAppendedPath
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.net.Uri
+
 
 class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
@@ -38,9 +44,10 @@ class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.Permissio
                     val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
                     val cursor = this.contentResolver?.query(selectedImage, filePathColumn, null, null, null)
                     if (cursor != null && cursor.moveToFirst() && cursor.count > 0) {
-                        var path = cursor.getString(cursor.getColumnIndex(filePathColumn[0]))
-                        bitmap = BitmapUtil.load(path, true)
-                        csp_image_test.setImageBitmap(bitmap)
+                        val id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID))
+                        val baseUri = Uri.parse("content://media/external/images/media")
+                        val uri = withAppendedPath(baseUri, "" + id)
+                        csp_image_test.setImageURI(uri)
                         cursor.close()
                     }
                 }
