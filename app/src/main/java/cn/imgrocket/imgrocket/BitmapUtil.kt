@@ -1,13 +1,37 @@
 package cn.imgrocket.imgrocket
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.graphics.Matrix
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import androidx.exifinterface.media.ExifInterface
 import java.io.IOException
 
 
 object BitmapUtil {
+
+    fun load(context: Context, uri: Uri): Bitmap? {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                return ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, uri))
+            } else {
+                val columns = arrayOf(MediaStore.Images.Media.DATA)
+                val cursor = context.contentResolver?.query(uri, columns, null, null, null)
+                if (cursor != null && cursor.moveToFirst() && cursor.count > 0) {
+                    val path = cursor.getString(cursor.getColumnIndex(columns[0]))
+                    cursor.close()
+                    return load(path, true)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
 
     private fun load(path: String): Bitmap {
         return BitmapFactory.decodeFile(path)
@@ -23,9 +47,9 @@ object BitmapUtil {
         } else {
             var bm = load(path)
             var digree = 0
-            var exif: androidx.exifinterface.media.ExifInterface?
+            var exif: ExifInterface?
             try {
-                exif = androidx.exifinterface.media.ExifInterface(path)
+                exif = ExifInterface(path)
             } catch (e: IOException) {
                 e.printStackTrace()
                 exif = null

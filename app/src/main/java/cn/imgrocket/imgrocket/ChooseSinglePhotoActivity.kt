@@ -34,15 +34,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.Permissio
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 RESULT_LOAD_IMAGE -> {
-                    val selectedImage = data.data!!
-                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                    val cursor = this.contentResolver?.query(selectedImage, filePathColumn, null, null, null)
-                    if (cursor != null && cursor.moveToFirst() && cursor.count > 0) {
-                        var path = cursor.getString(cursor.getColumnIndex(filePathColumn[0]))
-                        bitmap = BitmapUtil.load(path, true)
-                        csp_image_test.setImageBitmap(bitmap)
-                        cursor.close()
-                    }
+                    data.data?.let { uri -> BitmapUtil.load(this, uri)?.also { csp_image_test.setImageBitmap(it) } }
                 }
             }
         }
