@@ -3,4 +3,5 @@
     <string name="app_name">咻图</string>
     <string name="test">测试</string>
     <string name="photo_permission">我们需要获得你的相册权限</string>
+    <string name="function">功能</string>
 </resources>
