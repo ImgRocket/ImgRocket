@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import tty.community.adapter.SimplePageFragmentAdapter
 
@@ -17,12 +18,10 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_file -> {
                     main_page_view.currentItem = 0
-                    Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_my -> {
                     main_page_view.currentItem = 1
-                    Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -32,6 +31,19 @@ class MainActivity : AppCompatActivity() {
         main_fab_add.setOnClickListener {
 
         }
+        main_page_view.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                main_nav_nav.selectedItemId = main_nav_nav.menu.getItem(position).itemId
+            }
+        })
+
     }
 
     private fun init() {
