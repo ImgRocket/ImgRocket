@@ -85,7 +85,7 @@ object BitmapUtil {
         }
     }
 
-    fun Bitmap.zoom(newWidth: Int, newHeight: Int): Bitmap{
+    fun Bitmap.zoom(newWidth: Int, newHeight: Int): Bitmap {
         val width = width
         val height = height
         val scaleWidth = newWidth / width.toFloat()

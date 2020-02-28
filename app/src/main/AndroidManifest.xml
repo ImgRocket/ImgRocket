@@ -16,13 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".FileActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".VipInformationActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".ChooseMultiPhotoActivity" />
         <activity android:name=".ChooseSinglePhotoActivity" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".UserActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
