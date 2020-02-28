@@ -3,8 +3,14 @@
     <string name="test">test</string>
     <string name="photo_permission">We need your photo permission</string>
     <string name="function">function</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noise_clear">clear noise</string>
+    <string name="image_fix">fix image</string>
+    <string name="rephoto">big!</string>
+    <string name="image_turn">turn</string>
+    <string name="image_cut">cut image</string>
+    <string name="image_spin">spin image</string>
+    <string name="files">files</string>
+    <string name="my">my</string>
 
 </resources>

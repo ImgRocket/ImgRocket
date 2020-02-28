@@ -1,12 +1,11 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_file"
         android:icon="@drawable/ic_folder_open_white_24dp"
-        android:title="文件" />
+        android:title="@string/files" />
     <item
         android:id="@+id/menu_my"
         android:icon="@drawable/ic_perm_identity_white_24dp"
-        android:title="我的"/>
+        android:title="@string/my" />
 
 </menu>

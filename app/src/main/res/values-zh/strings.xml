@@ -4,4 +4,13 @@
     <string name="test">测试</string>
     <string name="photo_permission">我们需要获得你的相册权限</string>
     <string name="function">功能</string>
+    <string name="hello_blank_fragment">你好空fragment</string>
+    <string name="noise_clear">噪点清除</string>
+    <string name="image_fix">图像修复</string>
+    <string name="rephoto">高清重制</string>
+    <string name="image_turn">图像翻转</string>
+    <string name="image_cut">图像裁剪</string>
+    <string name="image_spin">图像旋转</string>
+    <string name="files">文件</string>
+    <string name="my">我的</string>
 </resources>

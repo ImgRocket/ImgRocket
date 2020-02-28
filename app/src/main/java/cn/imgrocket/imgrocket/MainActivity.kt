@@ -28,9 +28,7 @@ class MainActivity : AppCompatActivity() {
             false
 
         }
-        main_fab_add.setOnClickListener {
 
-        }
         main_page_view.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 

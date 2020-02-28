@@ -9,17 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/main_fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/main_nav_nav"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_add_white_24dp"
-        app:fabSize="auto" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_nav_nav"
