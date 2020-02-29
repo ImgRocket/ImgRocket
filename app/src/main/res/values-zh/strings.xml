@@ -13,4 +13,6 @@
     <string name="image_spin">图像旋转</string>
     <string name="files">文件</string>
     <string name="my">我的</string>
+    <string name="choose_multi_photos">选择多张图片</string>
+    <string name="no_storage_permission">我们需要你的存储权限</string>
 </resources>

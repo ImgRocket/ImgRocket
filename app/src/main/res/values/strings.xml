@@ -12,5 +12,7 @@
     <string name="image_spin">spin image</string>
     <string name="files">files</string>
     <string name="my">my</string>
+    <string name="choose_multi_photos">choose multi photos</string>
+    <string name="no_storage_permission">You should give us storage permission.</string>
 
 </resources>

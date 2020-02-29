@@ -21,13 +21,12 @@ import android.net.Uri
 
 class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
-        Toast.makeText(this, "不给权限弄死你", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getText(R.string.no_storage_permission), Toast.LENGTH_LONG).show()
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {}
 
     private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    private var bitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.Permissio
     }
 
     private fun getPicture() {
-        getPermission()
+        //getPermission()
         val intent = Intent(Intent.ACTION_PICK, null)
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
         startActivityForResult(intent, RESULT_LOAD_IMAGE)
