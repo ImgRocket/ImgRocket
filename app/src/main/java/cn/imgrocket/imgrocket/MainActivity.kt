@@ -1,12 +1,9 @@
 package cn.imgrocket.imgrocket
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
-import tty.community.adapter.SimplePageFragmentAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
