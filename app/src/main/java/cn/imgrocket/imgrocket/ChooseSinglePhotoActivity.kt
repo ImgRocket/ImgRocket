@@ -46,9 +46,8 @@ class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.Permissio
     }
 
     private fun getPicture() {
-        getPermission()
-        val intent = Intent(Intent.ACTION_PICK, null)
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+//        getPermission()
+        val intent = Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RESULT_LOAD_IMAGE)
     }
 
