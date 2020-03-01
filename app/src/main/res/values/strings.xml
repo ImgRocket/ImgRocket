@@ -10,10 +10,14 @@
     <string name="image_turn">turn</string>
     <string name="image_cut">cut image</string>
     <string name="image_spin">spin image</string>
-    <string name="files">files</string>
+    <string name="processing">processing</string>
     <string name="my">my</string>
     <string name="choose_multi_photos">choose multi photos</string>
     <string name="no_storage_permission">You should give us storage permission.</string>
     <string name="disabled">disabled</string>
+    <string name="user_image">user image</string>
+    <string name="username">username</string>
+    <string name="done">done</string>
+    <string name="placeholder" translatable="false">123456789</string>
 
 </resources>

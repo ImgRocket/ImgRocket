@@ -13,12 +13,16 @@ class MainActivity : AppCompatActivity() {
         init()
         main_nav_nav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_file -> {
+                R.id.menu_processing -> {
                     main_page_view.currentItem = 0
                     return@setOnNavigationItemSelectedListener true
                 }
-                R.id.menu_my -> {
+                R.id.menu_done -> {
                     main_page_view.currentItem = 1
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.menu_my -> {
+                    main_page_view.currentItem = 2
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(FileFragment(), UserFragment()))
+        adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(ProcessingFragment(), DoneFragment(), UserFragment()))
         main_page_view.adapter = adapter
         main_page_view.currentItem = 0
     }

@@ -11,9 +11,13 @@
     <string name="image_turn">图像翻转</string>
     <string name="image_cut">图像裁剪</string>
     <string name="image_spin">图像旋转</string>
-    <string name="files">文件</string>
+    <string name="processing">处理中</string>
     <string name="my">我的</string>
     <string name="choose_multi_photos">选择多张图片</string>
     <string name="no_storage_permission">我们需要你的存储权限</string>
     <string name="disabled">不可用</string>
+    <string name="username">用户名</string>
+    <string name="done">已完成</string>
+    <string name="user_image">头像</string>
+
 </resources>
