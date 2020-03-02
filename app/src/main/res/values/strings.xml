@@ -16,8 +16,8 @@
     <string name="no_storage_permission">You should give us storage permission.</string>
     <string name="disabled">disabled</string>
     <string name="user_image">user image</string>
-    <string name="username">username</string>
     <string name="done">done</string>
-    <string name="placeholder" translatable="false">123456789</string>
+    <string name="placeholder_string">placeholder</string>
+    <string name="placeholder_number" translatable="false">123456789</string>
 
 </resources>

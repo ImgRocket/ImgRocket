@@ -16,8 +16,8 @@
     <string name="choose_multi_photos">选择多张图片</string>
     <string name="no_storage_permission">我们需要你的存储权限</string>
     <string name="disabled">不可用</string>
-    <string name="username">用户名</string>
     <string name="done">已完成</string>
     <string name="user_image">头像</string>
+    <string name="placeholder_string">占位符</string>
 
 </resources>

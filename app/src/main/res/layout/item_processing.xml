@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginTop="4dp">
+
+    <ImageView
+        android:id="@+id/processing_item_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_add_shopping_cart_black_24dp"
+        tools:ignore="contentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@+id/processing_item_op"
+        android:layout_toEndOf="@+id/processing_item_icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/processing_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/placeholder_string" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginBottom="6dp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/processing_item_op"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_pause_black_24dp"
+        tools:ignore="contentDescription" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey" />
+</RelativeLayout>

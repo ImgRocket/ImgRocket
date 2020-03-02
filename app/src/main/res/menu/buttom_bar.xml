@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_processing"
-        android:icon="@drawable/ic_folder_open_white_24dp"
+        android:icon="@drawable/ic_folder_open_black_24dp"
         android:title="@string/processing" />
     <item
         android:id="@+id/menu_done"
         android:icon="@drawable/ic_offline_pin_black_24dp"
-        android:title="@string/done"/>
+        android:title="@string/done" />
     <item
         android:id="@+id/menu_my"
-        android:icon="@drawable/ic_perm_identity_white_24dp"
+        android:icon="@drawable/ic_perm_identity_black_24dp"
         android:title="@string/my" />
 
 </menu>

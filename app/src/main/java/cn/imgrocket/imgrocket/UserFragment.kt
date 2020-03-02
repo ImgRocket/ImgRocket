@@ -19,6 +19,8 @@ class UserFragment : Fragment() {
         user_layout_item1.setOnClickListener { }
         user_layout_item2.setOnClickListener { }
         user_layout_item3.setOnClickListener { }
+        user_layout_item4.setOnClickListener { }
+        user_layout_item5.setOnClickListener { }
     }
 
 }

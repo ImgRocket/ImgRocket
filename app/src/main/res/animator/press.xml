@@ -2,8 +2,11 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <item android:drawable="@drawable/btn_bg_normal" android:state_pressed="false"/>
-    <item android:drawable="@drawable/btn_bg_pressed" android:state_pressed="true"/>
+    <item
+        android:drawable="@drawable/btn_bg_normal"
+        android:state_pressed="false" />
+    <item
+        android:drawable="@drawable/btn_bg_pressed"
+        android:state_pressed="true" />
 
 </selector>
