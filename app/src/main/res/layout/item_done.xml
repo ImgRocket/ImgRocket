@@ -22,17 +22,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/processing_item_text"
+            android:id="@+id/processing_item_text1"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="10dp"
             android:text="@string/placeholder_string" />
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
+        <TextView
+            android:id="@+id/processing_item_text2"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginBottom="6dp" />
+            android:layout_height="30dp"
+
+            android:text="@string/placeholder_number"
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
+
 
     </LinearLayout>
 
@@ -42,7 +46,7 @@
         android:layout_height="24dp"
         android:layout_alignParentEnd="true"
         android:layout_margin="18dp"
-        android:src="@drawable/ic_pause_black_24dp"
+        android:src="@drawable/ic_delete_black_24dp"
         android:tint="@color/grey"
         tools:ignore="contentDescription" />
 

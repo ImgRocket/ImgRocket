@@ -1,4 +1,4 @@
-package cn.imgrocket.imgrocket
+package cn.imgrocket.imgrocket.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

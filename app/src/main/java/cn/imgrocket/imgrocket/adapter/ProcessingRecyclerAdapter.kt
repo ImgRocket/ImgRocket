@@ -1,13 +1,13 @@
-package cn.imgrocket.imgrocket
+package cn.imgrocket.imgrocket.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.imgrocket.imgrocket.APP.Companion.context
+import cn.imgrocket.imgrocket.R
 
-class RecyclerAdapter(private val items: List<String>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class ProcessingRecyclerAdapter(private val items: List<String>) : RecyclerView.Adapter<ProcessingRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_processing, parent, false)
@@ -21,7 +21,7 @@ class RecyclerAdapter(private val items: List<String>) : RecyclerView.Adapter<Re
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var text: TextView = itemView.findViewById(R.id.processing_item_text)
+
     }
 
 

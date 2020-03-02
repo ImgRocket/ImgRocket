@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.imgrocket.imgrocket.adapter.ProcessingRecyclerAdapter
 import kotlinx.android.synthetic.main.fragment_processing.*
 
 class ProcessingFragment : Fragment() {
@@ -21,52 +22,11 @@ class ProcessingFragment : Fragment() {
         val items = listOf(
                 "item1",
                 "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5",
-                "item1",
-                "item2",
-                "item3",
-                "item4",
-                "item5"
+                "item3"
         )
         initListener()
         processing_recycler_view.layoutManager = LinearLayoutManager(context)
-        processing_recycler_view.adapter = RecyclerAdapter(items)
+        processing_recycler_view.adapter = ProcessingRecyclerAdapter(items)
 
     }
 
