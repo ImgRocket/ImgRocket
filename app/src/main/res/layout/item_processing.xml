@@ -31,6 +31,7 @@
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
+            android:id="@+id/processing_progress"
             android:layout_height="24dp"
             android:layout_marginBottom="6dp" />
 
