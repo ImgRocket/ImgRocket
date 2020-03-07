@@ -1,6 +1,7 @@
 package cn.imgrocket.imgrocket
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,14 +20,14 @@ class ProcessingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val items = listOf(
-                "item1",
-                "item2",
-                "item3"
-        )
+        val items: ArrayList<HashMap<String, Any>> = ArrayList()
+        items.add(hashMapOf(Pair("text", "2020-2-7 21:59"), Pair("op", 1), Pair("progress", 45)))
+        items.add(hashMapOf(Pair("text", "2020-2-7 21:22"), Pair("op", 0), Pair("progress", 22)))
+        items.add(hashMapOf(Pair("text", "2020-2-7 22:22"), Pair("op", 1), Pair("progress", 67)))
+
         initListener()
         processing_recycler_view.layoutManager = LinearLayoutManager(context)
-        processing_recycler_view.adapter = ProcessingRecyclerAdapter(items)
+        processing_recycler_view.adapter = context?.let { ProcessingRecyclerAdapter(items, it) }
 
     }
 
