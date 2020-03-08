@@ -19,6 +19,7 @@ class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, v
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_processing, parent, false)
         view.findViewById<ImageView>(R.id.processing_item_op).setOnClickListener(OnClick())
+        view.setOnLongClickListener(OnLongClick())
         return ViewHolder(view)
     }
 
@@ -48,5 +49,11 @@ class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, v
 
     }
 
+    class OnLongClick : View.OnLongClickListener {
+        override fun onLongClick(v: View?): Boolean {
+            return true
+        }
+
+    }
 
 }

@@ -2,14 +2,11 @@ package cn.imgrocket.imgrocket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import cn.imgrocket.imgrocket.helpfragment.*
 import kotlinx.android.synthetic.main.activity_help.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.main_page_view
 
 class HelpActivity : AppCompatActivity() {
@@ -43,8 +40,8 @@ class HelpActivity : AppCompatActivity() {
         main_page_view.currentItem = 0
     }
 
-    private fun currentPage(imgs: ArrayList<ImageView>, pos: Int) {
-        for (i in 0 until pos) imgs[i].setImageDrawable(resources.getDrawable(R.drawable.ic_lens_black_24dp, null))
-        for(i in pos until imgs.size) imgs[i].setImageDrawable(resources.getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp, null))
+    private fun currentPage(img: ArrayList<ImageView>, pos: Int) {
+        for (i in 0 until pos) img[i].setImageDrawable(resources.getDrawable(R.drawable.ic_lens_black_24dp, null))
+        for (i in pos until img.size) img[i].setImageDrawable(resources.getDrawable(R.drawable.ic_panorama_fish_eye_black_24dp, null))
     }
 }
