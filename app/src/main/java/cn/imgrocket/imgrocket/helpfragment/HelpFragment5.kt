@@ -8,6 +8,8 @@ import android.view.ViewGroup
 
 import cn.imgrocket.imgrocket.R
 import kotlinx.android.synthetic.main.fragment_help5.*
+import java.io.File
+import java.io.FileOutputStream
 
 class HelpFragment5 : Fragment() {
 
@@ -20,6 +22,8 @@ class HelpFragment5 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         help5_btn_finish.setOnClickListener {
+            val file = File((context?.filesDir?.path ) + "/notNew")
+            val output = FileOutputStream(file)
             activity?.finish()
         }
     }

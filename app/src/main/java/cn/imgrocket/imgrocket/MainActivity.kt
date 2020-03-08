@@ -9,7 +9,6 @@ import cn.imgrocket.imgrocket.Function.black
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
-import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
@@ -19,8 +18,6 @@ class MainActivity : AppCompatActivity() {
         black(this)
         init()
         if (needHelp()) {
-            val file = File(applicationContext.filesDir.path + "notNew")
-            val output = FileOutputStream(file)
             val intent = Intent()
             intent.setClass(this, HelpActivity::class.java)
             startActivity(intent)
@@ -74,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun needHelp(): Boolean {
-        val f = File(applicationContext.filesDir.path + "notNew")
+        val f = File(applicationContext.filesDir.path + "/notNew")
         return !f.exists()
     }
 }
