@@ -6,6 +6,8 @@ import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
+import cn.imgrocket.imgrocket.APP.Companion.context
 
 import com.google.gson.Gson
 import com.google.gson.internal.GsonBuildConfig
@@ -82,6 +84,10 @@ internal object Function {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         }
+    }
+
+    fun toast(string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 }
 
