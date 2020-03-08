@@ -3,20 +3,12 @@ package cn.imgrocket.imgrocket
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
-
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_choose_single_photo.*
 import pub.devrel.easypermissions.EasyPermissions
-import android.net.Uri.withAppendedPath
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.net.Uri
 
 
 class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -31,6 +23,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.Permissio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_single_photo)
+        Function.black(this)
         getPicture()
     }
 

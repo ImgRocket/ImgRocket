@@ -1,6 +1,11 @@
 package cn.imgrocket.imgrocket
 
+import android.app.Activity
+import android.content.Context
+import android.os.Build
 import android.os.Handler
+import android.view.View
+import android.view.WindowManager
 
 import com.google.gson.Gson
 import com.google.gson.internal.GsonBuildConfig
@@ -70,6 +75,13 @@ internal object Function {
 
     internal interface Callback {
         fun onResponse(result: String?)
+    }
+
+    fun black(activity: Activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        }
     }
 }
 

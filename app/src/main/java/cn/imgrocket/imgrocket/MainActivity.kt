@@ -1,28 +1,35 @@
 package cn.imgrocket.imgrocket
 
-import android.annotation.SuppressLint
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import cn.imgrocket.imgrocket.Function.black
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        }
-
+        black(this)
         init()
+        if (needHelp()) {
+            val file = File(applicationContext.filesDir.path + "notNew")
+            val output = FileOutputStream(file)
+            val intent = Intent()
+            intent.setClass(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
+        main_img_help.setOnClickListener {
+            val intent = Intent()
+            intent.setClass(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
         main_nav_nav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_processing -> {
@@ -65,4 +72,11 @@ class MainActivity : AppCompatActivity() {
         main_page_view.adapter = adapter
         main_page_view.currentItem = 0
     }
+
+    private fun needHelp(): Boolean {
+        val f = File(applicationContext.filesDir.path + "notNew")
+        return !f.exists()
+    }
 }
+
+

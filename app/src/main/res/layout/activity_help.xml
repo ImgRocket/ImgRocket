@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/main_page_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="48dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp">
+
+        <ImageView
+            android:id="@+id/help_img_circle1"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            android:layout_toStartOf="@id/help_img_circle2"
+            android:src="@drawable/ic_lens_black_24dp"
+            android:tint="@color/colorPrimary"
+            tools:ignore="contentDescription" />
+
+        <ImageView
+            android:id="@+id/help_img_circle2"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            android:layout_toStartOf="@id/help_img_circle3"
+            android:src="@drawable/ic_lens_black_24dp"
+            android:tint="@color/colorPrimary"
+            tools:ignore="contentDescription" />
+
+        <ImageView
+            android:id="@+id/help_img_circle3"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="2dp"
+            android:src="@drawable/ic_lens_black_24dp"
+            android:tint="@color/colorPrimary"
+            tools:ignore="contentDescription" />
+
+        <ImageView
+            android:id="@+id/help_img_circle4"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_margin="2dp"
+            android:layout_toEndOf="@+id/help_img_circle3"
+            android:src="@drawable/ic_panorama_fish_eye_black_24dp"
+            android:tint="@color/colorPrimary"
+            tools:ignore="contentDescription" />
+
+        <ImageView
+            android:id="@+id/help_img_circle5"
+            android:layout_width="12dp"
+            android:layout_height="24dp"
+            android:layout_margin="2dp"
+            android:layout_toEndOf="@+id/help_img_circle4"
+            android:src="@drawable/ic_panorama_fish_eye_black_24dp"
+            android:tint="@color/colorPrimary"
+            tools:ignore="contentDescription" />
+    </RelativeLayout>
+</RelativeLayout>
