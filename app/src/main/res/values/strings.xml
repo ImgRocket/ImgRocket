@@ -19,5 +19,11 @@
     <string name="done">done</string>
     <string name="placeholder_string">placeholder</string>
     <string name="placeholder_number" translatable="false">123456789</string>
+    <string name="account">account</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="login_with_other_app">Login with other APP</string>
+    <string name="create_account">create account</string>
+    <string name="forget_password">forget password</string>
 
 </resources>

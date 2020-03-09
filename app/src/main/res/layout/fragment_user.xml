@@ -28,6 +28,7 @@
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/user_image"
                 android:src="@drawable/ic_account_circle_black_24dp"
                 android:tint="@color/grey" />

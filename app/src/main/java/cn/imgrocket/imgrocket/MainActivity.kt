@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.Function.black
+import cn.imgrocket.imgrocket.Function.testActivity
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -25,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         main_img_help.setOnClickListener {
             val intent = Intent()
             intent.setClass(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
+        main_img_avatar.setOnClickListener {
+            val intent = Intent()
+            intent.setClass(this, LoginActivity::class.java)
             startActivity(intent)
         }
         main_nav_nav.setOnNavigationItemSelectedListener {

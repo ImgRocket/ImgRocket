@@ -11,6 +11,9 @@
     <color name="color_icon6">#997986CB</color>
     <color name="color_icon7">#99BA68C8</color>
     <color name="grey">#999999</color>
+    <color name="red">#E91E63</color>
+    <color name="blue">#03A9F4</color>
+    <color name="green">#4CAF50</color>
     <drawable name="color_normal">#FFFFFF</drawable>
     <drawable name="color_pressed">#999999</drawable>
 </resources>

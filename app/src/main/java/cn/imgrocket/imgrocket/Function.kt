@@ -2,11 +2,13 @@ package cn.imgrocket.imgrocket
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import cn.imgrocket.imgrocket.APP.Companion.context
 
 import com.google.gson.Gson
@@ -89,5 +91,13 @@ internal object Function {
     fun toast(string: String) {
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
+
+    fun testActivity(activityFrom: Activity, activityTo: Activity) {
+        val intent = Intent()
+        intent.setClass(activityFrom.applicationContext, activityTo::class.java)
+        activityFrom.startActivity(intent)
+    }
 }
+
+
 
