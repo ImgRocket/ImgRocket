@@ -19,15 +19,16 @@ def getVersionCode() {
 
 static def getVersionName() {
     def date = new Date();
-    def versionName = date.format('yy.MM.dd')
+    def versionName = date.format('yyMMdd')
     return versionName
 }
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    def mainVersionName = "0.1"
     def currentVersionCode = getVersionCode()
-    def currentVersionName = getVersionName() + "." + currentVersionCode
+    def currentVersionName = mainVersionName + "." + getVersionName() + "." + currentVersionCode
     defaultConfig {
         applicationId "cn.imgrocket.imgrocket"
         minSdkVersion 21
@@ -38,7 +39,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
