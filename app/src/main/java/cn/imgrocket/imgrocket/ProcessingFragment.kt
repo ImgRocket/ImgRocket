@@ -69,7 +69,6 @@ class ProcessingFragment : Fragment() {
             val intent = Intent()
             activity?.let { it1 -> intent.setClass(it1, ChooseMultiPhotoActivity::class.java) }
             intent.putExtra("Function", 6)
-
             startActivity(intent)
         }
     }

@@ -22,11 +22,21 @@ class UserFragment : Fragment() {
             activity?.let { it1 -> intent.setClass(it1, LoginActivity::class.java) }
             startActivity(intent)
         }
-        user_layout_item1.setOnClickListener { }
-        user_layout_item2.setOnClickListener { }
-        user_layout_item3.setOnClickListener { }
-        user_layout_item4.setOnClickListener { }
-        user_layout_item5.setOnClickListener { }
+        user_layout_item1.setOnClickListener {
+            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+        }
+        user_layout_item2.setOnClickListener {
+            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+        }
+        user_layout_item3.setOnClickListener {
+            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+        }
+        user_layout_item4.setOnClickListener {
+            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+        }
+        user_layout_item5.setOnClickListener {
+            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+        }
     }
 
 }

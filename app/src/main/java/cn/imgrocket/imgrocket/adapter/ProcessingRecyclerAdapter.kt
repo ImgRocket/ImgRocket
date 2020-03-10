@@ -1,5 +1,6 @@
 package cn.imgrocket.imgrocket.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -12,7 +13,9 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import cn.imgrocket.imgrocket.Function
 import cn.imgrocket.imgrocket.R
+import kotlin.coroutines.coroutineContext
 
 class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, val context: Context) : RecyclerView.Adapter<ProcessingRecyclerAdapter.ViewHolder>() {
 
@@ -44,13 +47,14 @@ class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, v
     class OnClick : View.OnClickListener {
 
         override fun onClick(v: View?) {
-
+            Function.toast(v!!.resources.getString(R.string.this_function_is_unavailable))
         }
 
     }
 
     class OnLongClick : View.OnLongClickListener {
         override fun onLongClick(v: View?): Boolean {
+            Function.toast(v!!.resources.getString(R.string.this_function_is_unavailable))
             return true
         }
 

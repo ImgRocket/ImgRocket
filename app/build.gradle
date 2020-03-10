@@ -2,15 +2,38 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+def getVersionCode() {
+    def versionFile = file('version.properties')
+    if (versionFile.canRead()) {
+        Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionFile))
+        def versionCode = versionProps['VERSION_CODE'].toInteger()
+        versionProps['VERSION_CODE'] = (++versionCode).toString()
+        versionProps.store(versionFile.newWriter(), null)
+        return versionCode
+    } else {
+        throw new GradleException("Could not find version.properties!")
+    }
+}
+
+
+static def getVersionName() {
+    def date = new Date();
+    def versionName = date.format('yy.MM.dd')
+    return versionName
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    def currentVersionCode = getVersionCode()
+    def currentVersionName = getVersionName() + "." + currentVersionCode
     defaultConfig {
         applicationId "cn.imgrocket.imgrocket"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode currentVersionCode
+        versionName currentVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -25,5 +25,6 @@
     <string name="login_with_other_app">Login with other APP</string>
     <string name="create_account">create account</string>
     <string name="forget_password">forget password</string>
-
+    <string name="login_with_imgrocket_account">Login with Imgrocket account</string>
+    <string name="this_function_is_unavailable">This function is unavailable now</string>
 </resources>
