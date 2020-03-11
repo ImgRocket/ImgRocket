@@ -16,6 +16,16 @@ class ChooseSinglePhotoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_single_photo)
         Function.black(this)
+        single_layout_add.setOnClickListener {
+            Matisse.from(this@ChooseSinglePhotoActivity)
+                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                    .countable(false)
+                    .theme(R.style.Matisse_Custom)
+                    .maxSelectable(1)
+                    .capture(false)
+                    .imageEngine(PicassoEngine())
+                    .forResult(REQUEST_CODE_CHOOSE)
+        }
         Matisse.from(this@ChooseSinglePhotoActivity)
                 .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
                 .countable(false)

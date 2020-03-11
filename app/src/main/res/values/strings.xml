@@ -27,4 +27,5 @@
     <string name="forget_password">forget password</string>
     <string name="login_with_imgrocket_account">Login with Imgrocket account</string>
     <string name="this_function_is_unavailable">This function is unavailable now</string>
+    <string name="please_choose_pictures">Please choose Pictures</string>
 </resources>
