@@ -1,10 +1,6 @@
 package cn.imgrocket.imgrocket.adapter
 
-import android.app.Activity
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +9,8 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import cn.imgrocket.imgrocket.Function
+import cn.imgrocket.imgrocket.tool.Function
 import cn.imgrocket.imgrocket.R
-import kotlin.coroutines.coroutineContext
 
 class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, val context: Context) : RecyclerView.Adapter<ProcessingRecyclerAdapter.ViewHolder>() {
 

@@ -2,8 +2,8 @@ package cn.imgrocket.imgrocket
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import cn.imgrocket.imgrocket.Function.black
-import cn.imgrocket.imgrocket.Function.toast
+import cn.imgrocket.imgrocket.tool.Function.black
+import cn.imgrocket.imgrocket.tool.Function.toast
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
 

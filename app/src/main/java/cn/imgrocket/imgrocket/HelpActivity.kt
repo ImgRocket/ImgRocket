@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import cn.imgrocket.imgrocket.helpfragment.*
+import cn.imgrocket.imgrocket.tool.Function
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.activity_main.main_page_view
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import cn.imgrocket.imgrocket.APP
+import cn.imgrocket.imgrocket.tool.APP
 import cn.imgrocket.imgrocket.R
 
 class DoneRecyclerAdapter(private val items: List<String>) : RecyclerView.Adapter<DoneRecyclerAdapter.ViewHolder>() {

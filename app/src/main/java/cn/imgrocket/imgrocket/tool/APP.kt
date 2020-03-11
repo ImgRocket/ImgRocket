@@ -1,4 +1,4 @@
-package cn.imgrocket.imgrocket
+package cn.imgrocket.imgrocket.tool
 
 import android.annotation.SuppressLint
 import android.app.Application

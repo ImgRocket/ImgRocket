@@ -1,56 +1,40 @@
 package cn.imgrocket.imgrocket
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.Toast
+import cn.imgrocket.imgrocket.tool.Function
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.PicassoEngine
 import kotlinx.android.synthetic.main.activity_choose_single_photo.*
-import pub.devrel.easypermissions.EasyPermissions
 
-
-class ChooseSinglePhotoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
-        Toast.makeText(this, getText(R.string.no_storage_permission), Toast.LENGTH_LONG).show()
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {}
-
-    private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+class ChooseSinglePhotoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_single_photo)
         Function.black(this)
-        getPicture()
+        Matisse.from(this@ChooseSinglePhotoActivity)
+                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                .countable(false)
+                .theme(R.style.Matisse_Custom)
+                .maxSelectable(1)
+                .capture(false)
+                .imageEngine(PicassoEngine())
+                .forResult(REQUEST_CODE_CHOOSE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            when (requestCode) {
-                RESULT_LOAD_IMAGE -> {
-                    data.data?.let { uri -> BitmapUtil.load(this, uri)?.also { csp_image_test.setImageBitmap(it) } }
-                }
-            }
-        }
-    }
-
-    private fun getPicture() {
-//        getPermission()
-        val intent = Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, RESULT_LOAD_IMAGE)
-    }
-
-    private fun getPermission() {
-        if (!EasyPermissions.hasPermissions(this, *permissions)) {
-            EasyPermissions.requestPermissions(this, resources.getString(R.string.photo_permission), 1, *permissions)
+        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
+            val result = Matisse.obtainResult(data)
+            single_text_show.text = result.toString()
         }
     }
 
     companion object {
-        const val RESULT_LOAD_IMAGE = 10
+        private const val REQUEST_CODE_CHOOSE = 23
     }
 }

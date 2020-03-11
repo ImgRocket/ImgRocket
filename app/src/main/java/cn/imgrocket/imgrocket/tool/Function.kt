@@ -1,18 +1,15 @@
-package cn.imgrocket.imgrocket
+package cn.imgrocket.imgrocket.tool
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import cn.imgrocket.imgrocket.APP.Companion.context
+import cn.imgrocket.imgrocket.tool.APP.Companion.context
 
 import com.google.gson.Gson
-import com.google.gson.internal.GsonBuildConfig
 
 import java.io.IOException
 

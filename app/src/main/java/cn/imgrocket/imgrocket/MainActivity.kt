@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import cn.imgrocket.imgrocket.Function.black
-import cn.imgrocket.imgrocket.Function.testActivity
+import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File

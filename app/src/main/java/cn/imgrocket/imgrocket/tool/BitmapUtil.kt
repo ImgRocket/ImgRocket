@@ -1,4 +1,4 @@
-package cn.imgrocket.imgrocket
+package cn.imgrocket.imgrocket.tool
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,7 +7,6 @@ import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
-import android.provider.MediaStore
 import androidx.exifinterface.media.ExifInterface
 import java.io.IOException
 

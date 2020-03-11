@@ -5,7 +5,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import cn.imgrocket.imgrocket.Function.post
+import cn.imgrocket.imgrocket.tool.Function
+import cn.imgrocket.imgrocket.tool.Function.post
 
 class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
