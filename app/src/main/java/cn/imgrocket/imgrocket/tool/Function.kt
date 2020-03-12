@@ -8,12 +8,13 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import cn.imgrocket.imgrocket.tool.APP.Companion.context
-
 import com.google.gson.Gson
-
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import java.io.IOException
-
-import okhttp3.*
+import kotlin.String
 
 
 //Function类存储了通用的方法
@@ -39,9 +40,9 @@ internal object Function {
     }
 
     fun post(url: String, s: String): String? {
-        val JSON = MediaType.parse("application/json; charset=utf-8")
+        val string = MediaType.parse("text/text; charset=utf-8")
         val okHttpClient = OkHttpClient()
-        val requestBody = RequestBody.create(JSON, s)
+        val requestBody = RequestBody.create(string, s)
         val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -94,6 +95,8 @@ internal object Function {
         intent.setClass(activityFrom.applicationContext, activityTo::class.java)
         activityFrom.startActivity(intent)
     }
+    
+
 }
 
 

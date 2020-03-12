@@ -14,7 +14,7 @@ import com.zhihu.matisse.engine.impl.PicassoEngine
 import kotlinx.android.synthetic.main.activity_choose_multi_photo.*
 import pub.devrel.easypermissions.EasyPermissions
 
-class ChooseMultiPhotoActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class ChooseMultiPhotoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,17 +22,17 @@ class ChooseMultiPhotoActivity : AppCompatActivity(), EasyPermissions.Permission
         black(this)
         multi_layout_add.setOnClickListener {
             Matisse.from(this@ChooseMultiPhotoActivity)
-                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                    .choose(MimeType.ofImage())
                     .countable(true)
-                    .maxSelectable(9)
+                    .maxSelectable(99999)
                     .capture(false)
                     .imageEngine(PicassoEngine())
                     .forResult(REQUEST_CODE_CHOOSE)
         }
         Matisse.from(this@ChooseMultiPhotoActivity)
-                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                .choose(MimeType.ofImage())
                 .countable(true)
-                .maxSelectable(9)
+                .maxSelectable(99999)
                 .capture(false)
                 .imageEngine(PicassoEngine())
                 .forResult(REQUEST_CODE_CHOOSE)
@@ -48,15 +48,6 @@ class ChooseMultiPhotoActivity : AppCompatActivity(), EasyPermissions.Permission
 
     companion object {
         private const val REQUEST_CODE_CHOOSE = 66
-    }
-
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
-        toast("又让马儿跑，又让马尔不吃草？")
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {
-        TODO("Not yet implemented")
     }
 
 

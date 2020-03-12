@@ -18,7 +18,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity() {
         Function.black(this)
         single_layout_add.setOnClickListener {
             Matisse.from(this@ChooseSinglePhotoActivity)
-                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                    .choose(MimeType.ofImage())
                     .countable(false)
                     .theme(R.style.Matisse_Custom)
                     .maxSelectable(1)
@@ -27,7 +27,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity() {
                     .forResult(REQUEST_CODE_CHOOSE)
         }
         Matisse.from(this@ChooseSinglePhotoActivity)
-                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                .choose(MimeType.ofImage())
                 .countable(false)
                 .theme(R.style.Matisse_Custom)
                 .maxSelectable(1)

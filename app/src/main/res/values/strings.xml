@@ -28,4 +28,6 @@
     <string name="login_with_imgrocket_account">Login with Imgrocket account</string>
     <string name="this_function_is_unavailable">This function is unavailable now</string>
     <string name="please_choose_pictures">Please choose Pictures</string>
+    <string name="create_your_imgrocket_account">create your Imgrocket account</string>
+    <string name="sign_up">sign up</string>
 </resources>
