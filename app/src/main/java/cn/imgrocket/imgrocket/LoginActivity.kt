@@ -3,15 +3,21 @@ package cn.imgrocket.imgrocket
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Message
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.tool.Function.black
+import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
 import cn.imgrocket.imgrocket.tool.URL
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
-import okhttp3.*
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.io.IOException
 import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,17 +29,16 @@ class LoginActivity : AppCompatActivity() {
         login_button_login.setOnClickListener {
             val account = login_edit_account.text.toString()
             val password = login_edit_password.text.toString()
-            if (password.length <= 6) {
+            if (password.length < 6) {
                 toast("密码需要至少六位")
                 return@setOnClickListener
             }
-            post(URL.loginURL, account, salt(password, "wcfnb"), object : Callback {
+            post(URL.loginURL, account, salt(password, getSalt()), object : Callback {
                 override fun onResponse(result: String?) {
                     if (result != null) {
                         toast(result)
-                    } else {
-                        toast("No")
                     }
+                    //TODO 把result解析出来
                 }
             })
         }

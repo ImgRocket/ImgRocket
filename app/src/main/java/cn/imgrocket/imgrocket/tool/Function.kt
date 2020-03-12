@@ -95,7 +95,10 @@ internal object Function {
         intent.setClass(activityFrom.applicationContext, activityTo::class.java)
         activityFrom.startActivity(intent)
     }
-    
+
+    fun getSalt(): String {
+        return "wcfnb"
+    }
 
 }
 

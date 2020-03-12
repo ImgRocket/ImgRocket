@@ -5,6 +5,7 @@ import android.os.Handler
 
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.tool.Function.black
+import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
 import cn.imgrocket.imgrocket.tool.URL
@@ -26,17 +27,20 @@ class CreateAccountActivity : AppCompatActivity() {
             val account = create_edit_account.text.toString()
             val password = create_edit_password.text.toString()
             val password2 = create_edit_password2.text.toString()
+            if (password.length < 6) {
+                toast("密码长度至少为6位")
+                return@setOnClickListener
+            }
             if (password != password2) {
                 toast("两次输入的密码不同")
                 return@setOnClickListener
             }
-            post(URL.signURL, account, salt(password, "wcfnb"), object : Callback {
+            post(URL.signURL, account, salt(password, getSalt()), object : Callback {
                 override fun onResponse(result: String?) {
                     if (result != null) {
                         toast(result)
-                    } else {
-                        toast("No")
                     }
+                    //TODO 把result解析出来
                 }
             })
         }
