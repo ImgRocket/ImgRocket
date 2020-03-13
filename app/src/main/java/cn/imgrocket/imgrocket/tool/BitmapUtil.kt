@@ -34,6 +34,7 @@ object BitmapUtil {
      * @param path 图片路径
      * @param adjustOrientation 是否自动旋转方向
      */
+    @Deprecated("this method is deprecated")
     fun load(path: String, adjustOrientation: Boolean): Bitmap {
         if (!adjustOrientation) {
             return load(path)

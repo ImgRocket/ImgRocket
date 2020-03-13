@@ -2,13 +2,18 @@ package cn.imgrocket.imgrocket
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
+import cn.imgrocket.imgrocket.tool.LoginResult
+import cn.imgrocket.imgrocket.tool.Message
+import cn.imgrocket.imgrocket.tool.Status
 import cn.imgrocket.imgrocket.tool.URL
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_create_account.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -39,8 +44,16 @@ class CreateAccountActivity : AppCompatActivity() {
                 override fun onResponse(result: String?) {
                     if (result != null) {
                         toast(result)
+                        val message = Message.parse(result, object : TypeToken<Message<String>>() {})
+//                        Log.d(javaClass.name, message.message)
+                        when(message.status) {
+                            Status.OK -> Log.d(javaClass.name, "注册成功")
+                            Status.UR -> Log.d(javaClass.name, "用户名已被注册")
+                            Status.AIF -> Log.d(javaClass.name, "用户名格式不正确")
+                            else -> Log.d(javaClass.name, "其他错误")
+                        }
                     }
-                    //TODO 把result解析出来
+
                 }
             })
         }

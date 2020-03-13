@@ -3,14 +3,17 @@ package cn.imgrocket.imgrocket
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
+import cn.imgrocket.imgrocket.tool.LoginResult
+import cn.imgrocket.imgrocket.tool.Message
+import cn.imgrocket.imgrocket.tool.Status
 import cn.imgrocket.imgrocket.tool.URL
-import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -36,9 +39,22 @@ class LoginActivity : AppCompatActivity() {
             post(URL.loginURL, account, salt(password, getSalt()), object : Callback {
                 override fun onResponse(result: String?) {
                     if (result != null) {
-                        toast(result)
+//                        toast(result)
+                        val message = Message.parse(result, object : TypeToken<Message<LoginResult>>() {})
+//                        Log.d(javaClass.name, message.message)
+                        when(message.status) {
+                            Status.OK -> {
+                                Log.d(javaClass.name, "登录成功")
+                                message.data?.let {
+                                    Log.d(javaClass.name, "LoginResult: ${it.uid} ${it.username} ${it.token}")
+                                }
+                            }
+                            Status.UPE -> Log.d(javaClass.name, "密码错误")
+                            Status.UNE -> Log.d(javaClass.name, "用户不存在")
+                            else -> Log.d(javaClass.name, "其他错误")
+                        }
+
                     }
-                    //TODO 把result解析出来
                 }
             })
         }
