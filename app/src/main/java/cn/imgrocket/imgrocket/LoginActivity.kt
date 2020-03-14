@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import cn.imgrocket.imgrocket.databinding.ActivityLoginBinding
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
@@ -14,7 +15,6 @@ import cn.imgrocket.imgrocket.tool.Message
 import cn.imgrocket.imgrocket.tool.Status
 import cn.imgrocket.imgrocket.tool.URL
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -23,15 +23,17 @@ import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         black(this)
         val locale: String = Locale.getDefault().language
-        if (locale != "zh") login_text_tip.textSize = 18F
-        login_button_login.setOnClickListener {
-            val account = login_edit_account.text.toString()
-            val password = login_edit_password.text.toString()
+        if (locale != "zh") binding.loginTextTip.textSize = 18F
+        binding.loginButtonLogin.setOnClickListener {
+            val account = binding.loginEditAccount.text.toString()
+            val password = binding.loginEditPassword.text.toString()
             if (password.length < 6) {
                 toast("密码需要至少六位")
                 return@setOnClickListener
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
 //                        toast(result)
                         val message = Message.parse(result, object : TypeToken<Message<LoginResult>>() {})
 //                        Log.d(javaClass.name, message.message)
-                        when(message.status) {
+                        when (message.status) {
                             Status.OK -> {
                                 Log.d(javaClass.name, "登录成功")
                                 message.data?.let {
@@ -58,21 +60,21 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
-        login_img_alipay.setOnClickListener {
+        binding.loginImgAlipay.setOnClickListener {
             toast(resources.getString(R.string.this_function_is_unavailable))
         }
-        login_img_qq.setOnClickListener {
+        binding.loginImgQq.setOnClickListener {
             toast(resources.getString(R.string.this_function_is_unavailable))
         }
-        login_img_wechat.setOnClickListener {
+        binding.loginImgWechat.setOnClickListener {
             toast(resources.getString(R.string.this_function_is_unavailable))
         }
-        login_text_create.setOnClickListener {
+        binding.loginTextCreate.setOnClickListener {
             val intent = Intent()
             intent.setClass(this, CreateAccountActivity::class.java)
             startActivity(intent)
         }
-        login_text_forget.setOnClickListener {
+        binding.loginTextForget.setOnClickListener {
             toast(resources.getString(R.string.this_function_is_unavailable))
         }
     }

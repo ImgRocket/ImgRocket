@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import cn.imgrocket.imgrocket.R
+import cn.imgrocket.imgrocket.databinding.FragmentHelp1Binding
 
 class HelpFragment1 : Fragment() {
-
+    private lateinit var binding: FragmentHelp1Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_help1, container, false)
+        binding = FragmentHelp1Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }

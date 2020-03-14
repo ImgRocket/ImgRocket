@@ -4,19 +4,20 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import cn.imgrocket.imgrocket.databinding.ActivityChooseSinglePhotoBinding
 import cn.imgrocket.imgrocket.tool.Function
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.PicassoEngine
-import kotlinx.android.synthetic.main.activity_choose_single_photo.*
 
 class ChooseSinglePhotoActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityChooseSinglePhotoBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choose_single_photo)
+        binding = ActivityChooseSinglePhotoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Function.black(this)
-        single_layout_add.setOnClickListener {
+        binding.singleLayoutAdd.setOnClickListener {
             Matisse.from(this@ChooseSinglePhotoActivity)
                     .choose(MimeType.ofImage())
                     .countable(false)
@@ -40,7 +41,7 @@ class ChooseSinglePhotoActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
             val result = Matisse.obtainResult(data)
-            single_text_show.text = result.toString()
+            binding.singleTextShow.text = result.toString()
         }
     }
 

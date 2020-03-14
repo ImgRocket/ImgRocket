@@ -2,19 +2,24 @@ package cn.imgrocket.imgrocket
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import cn.imgrocket.imgrocket.databinding.ActivityMainBinding
 import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         black(this)
         init()
         if (needHelp()) {
@@ -22,31 +27,31 @@ class MainActivity : AppCompatActivity() {
             intent.setClass(this, HelpActivity::class.java)
             startActivity(intent)
         }
-        main_img_help.setOnClickListener {
+        binding.mainImgHelp.setOnClickListener {
             val intent = Intent()
             intent.setClass(this, HelpActivity::class.java)
             startActivity(intent)
         }
-        main_img_avatar.setOnClickListener {
+        binding.mainImgAvatar.setOnClickListener {
             val intent = Intent()
             intent.setClass(this, LoginActivity::class.java)
             startActivity(intent)
         }
-        main_nav_nav.setOnNavigationItemSelectedListener {
+        binding.mainNavNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_processing -> {
-                    main_img_avatar.visibility = View.VISIBLE
-                    main_page_view.currentItem = 0
+                    binding.mainImgAvatar.visibility = View.VISIBLE
+                    binding.mainPageView.currentItem = 0
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_done -> {
-                    main_img_avatar.visibility = View.VISIBLE
-                    main_page_view.currentItem = 1
+                    binding.mainImgAvatar.visibility = View.VISIBLE
+                    binding.mainPageView.currentItem = 1
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_my -> {
-                    main_img_avatar.visibility = View.INVISIBLE
-                    main_page_view.currentItem = 2
+                    binding.mainImgAvatar.visibility = View.INVISIBLE
+                    binding.mainPageView.currentItem = 2
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        main_page_view.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        binding.mainPageView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -63,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                main_nav_nav.selectedItemId = main_nav_nav.menu.getItem(position).itemId
+                binding.mainNavNav.selectedItemId = binding.mainNavNav.menu.getItem(position).itemId
             }
         })
 
@@ -71,8 +76,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(ProcessingFragment(), DoneFragment(), UserFragment()))
-        main_page_view.adapter = adapter
-        main_page_view.currentItem = 0
+        binding.mainPageView.adapter = adapter
+        binding.mainPageView.currentItem = 0
     }
 
     private fun needHelp(): Boolean {

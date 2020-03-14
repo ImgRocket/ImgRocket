@@ -5,23 +5,23 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
+import cn.imgrocket.imgrocket.databinding.ActivityHelpBinding
 import cn.imgrocket.imgrocket.helpfragment.*
 import cn.imgrocket.imgrocket.tool.Function
-import kotlinx.android.synthetic.main.activity_help.*
-import kotlinx.android.synthetic.main.activity_main.main_page_view
 
 class HelpActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
     lateinit var helpImgCircles: ArrayList<ImageView>
-
+    private lateinit var binding: ActivityHelpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_help)
+        binding = ActivityHelpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Function.black(this)
         init()
-        helpImgCircles = arrayListOf(help_img_circle1, help_img_circle2, help_img_circle3, help_img_circle4, help_img_circle5)
+        helpImgCircles = arrayListOf(binding.helpImgCircle1, binding.helpImgCircle2, binding.helpImgCircle3, binding.helpImgCircle4, binding.helpImgCircle5)
         currentPage(helpImgCircles, 1)
-        main_page_view.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        binding.helpPageView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -37,8 +37,8 @@ class HelpActivity : AppCompatActivity() {
 
     private fun init() {
         adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(HelpFragment1(), HelpFragment2(), HelpFragment3(), HelpFragment4(), HelpFragment5()))
-        main_page_view.adapter = adapter
-        main_page_view.currentItem = 0
+        binding.helpPageView.adapter = adapter
+        binding.helpPageView.currentItem = 0
     }
 
     private fun currentPage(img: ArrayList<ImageView>, pos: Int) {

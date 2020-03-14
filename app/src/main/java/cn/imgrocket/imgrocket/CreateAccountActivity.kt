@@ -5,16 +5,15 @@ import android.os.Handler
 import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
+import cn.imgrocket.imgrocket.databinding.ActivityCreateAccountBinding
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
-import cn.imgrocket.imgrocket.tool.LoginResult
 import cn.imgrocket.imgrocket.tool.Message
 import cn.imgrocket.imgrocket.tool.Status
 import cn.imgrocket.imgrocket.tool.URL
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_create_account.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -22,16 +21,18 @@ import java.io.IOException
 
 
 class CreateAccountActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCreateAccountBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_account)
+        binding = ActivityCreateAccountBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         black(this)
 
-        create_button_sign.setOnClickListener {
-            val account = create_edit_account.text.toString()
-            val password = create_edit_password.text.toString()
-            val password2 = create_edit_password2.text.toString()
+        binding.createButtonSign.setOnClickListener {
+            val account = binding.createEditAccount.text.toString()
+            val password = binding.createEditPassword.text.toString()
+            val password2 = binding.createEditPassword2.text.toString()
             if (password.length < 6) {
                 toast("密码长度至少为6位")
                 return@setOnClickListener
@@ -46,7 +47,7 @@ class CreateAccountActivity : AppCompatActivity() {
                         toast(result)
                         val message = Message.parse(result, object : TypeToken<Message<String>>() {})
 //                        Log.d(javaClass.name, message.message)
-                        when(message.status) {
+                        when (message.status) {
                             Status.OK -> Log.d(javaClass.name, "注册成功")
                             Status.UR -> Log.d(javaClass.name, "用户名已被注册")
                             Status.AIF -> Log.d(javaClass.name, "用户名格式不正确")

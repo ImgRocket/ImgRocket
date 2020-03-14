@@ -6,7 +6,7 @@
     tools:context=".HelpActivity">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/main_page_view"
+        android:id="@+id/help_page_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="48dp" />

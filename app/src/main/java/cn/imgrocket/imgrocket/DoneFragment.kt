@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.imgrocket.imgrocket.adapter.DoneRecyclerAdapter
-import kotlinx.android.synthetic.main.fragment_done.*
+import cn.imgrocket.imgrocket.databinding.FragmentDoneBinding
 
 class DoneFragment : Fragment() {
-
+    private lateinit var binding: FragmentDoneBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_done, container, false)
+        binding = FragmentDoneBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class DoneFragment : Fragment() {
                 "item2",
                 "item3"
         )
-        done_recycler_view.layoutManager = LinearLayoutManager(context)
-        done_recycler_view.adapter = DoneRecyclerAdapter(items)
+        binding.doneRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.doneRecyclerView.adapter = DoneRecyclerAdapter(items)
     }
 }

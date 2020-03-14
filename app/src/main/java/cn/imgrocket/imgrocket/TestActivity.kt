@@ -1,20 +1,20 @@
 package cn.imgrocket.imgrocket
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import cn.imgrocket.imgrocket.databinding.ActivityTestBinding
 import cn.imgrocket.imgrocket.tool.Function
 import cn.imgrocket.imgrocket.tool.Function.post
 
 class TestActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
-        val buttonSubmit = findViewById<Button>(R.id.test_button_submit)
-        val textViewView = findViewById<TextView>(R.id.test_textview_view)
-        val editTextInput = findViewById<EditText>(R.id.test_edit_input)
+        binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val buttonSubmit = binding.testButtonSubmit
+        val textViewView = binding.testTextviewView
+        val editTextInput = binding.testEditInput
         buttonSubmit.setOnClickListener {
             post("https://api.huhaorui.com/test.php", editTextInput.text.toString(), object : Function.Callback {
                 override fun onResponse(result: String?) {

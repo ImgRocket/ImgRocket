@@ -25,12 +25,17 @@ static def getVersionName() {
 }
 
 android {
+    viewBinding {
+        enabled = true
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     def mainVersionName = "0.1"
+
     def currentVersionCode = getVersionCode()
     def currentVersionName = mainVersionName + "." + getVersionName() + "." + currentVersionCode
     defaultConfig {
+
         applicationId "cn.imgrocket.imgrocket"
         minSdkVersion 21
         targetSdkVersion 29
@@ -38,6 +43,7 @@ android {
         versionName currentVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled true
