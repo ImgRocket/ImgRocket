@@ -2,13 +2,12 @@ package cn.imgrocket.imgrocket
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import cn.imgrocket.imgrocket.databinding.ActivityMainBinding
+import cn.imgrocket.imgrocket.tool.Function.black
 import java.io.File
 
 
@@ -18,10 +17,32 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        when (intent.extras?.get("Function")) {
+            1 -> {
+                val intent = Intent()
+                intent.setClass(this, ChooseMultiPhotoActivity::class.java)
+                intent.putExtra("Function", 1)
+                startActivity(intent)
+            }
+            2 -> {
+                val intent = Intent()
+                intent.setClass(this, ChooseSinglePhotoActivity::class.java)
+                intent.putExtra("Function", 2)
+                startActivity(intent)
+            }
+            3 -> {
+                val intent = Intent()
+                intent.setClass(this, ChooseMultiPhotoActivity::class.java)
+                intent.putExtra("Function", 3)
+                startActivity(intent)
+            }
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         black(this)
         init()
+
         if (needHelp()) {
             val intent = Intent()
             intent.setClass(this, HelpActivity::class.java)

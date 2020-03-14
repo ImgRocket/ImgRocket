@@ -10,10 +10,6 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="cn.imgrocket.imgrocket.MainActivity"
-            android:targetPackage="cn.imgrocket.imgrocket" />
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="cn.imgrocket.imgrocket.ChooseMultiPhotoActivity"
             android:targetPackage="cn.imgrocket.imgrocket">
             <extra
                 android:name="Function"
@@ -30,10 +26,6 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="cn.imgrocket.imgrocket.MainActivity"
-            android:targetPackage="cn.imgrocket.imgrocket" />
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="cn.imgrocket.imgrocket.ChooseSinglePhotoActivity"
             android:targetPackage="cn.imgrocket.imgrocket">
             <extra
                 android:name="Function"
@@ -50,10 +42,6 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="cn.imgrocket.imgrocket.MainActivity"
-            android:targetPackage="cn.imgrocket.imgrocket" />
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="cn.imgrocket.imgrocket.ChooseMultiPhotoActivity"
             android:targetPackage="cn.imgrocket.imgrocket">
             <extra
                 android:name="Function"
