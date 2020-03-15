@@ -73,7 +73,7 @@ class CreateAccountActivity : AppCompatActivity() {
         try {
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                return response.body()!!.string()
+                return response.body!!.string()
             }
         } catch (e: IOException) {
             e.printStackTrace()

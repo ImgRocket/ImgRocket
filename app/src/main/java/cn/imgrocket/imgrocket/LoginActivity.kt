@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
         try {
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                return response.body()!!.string()
+                return response.body!!.string()
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -127,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
         try {
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                return response.body()!!.string()
+                return response.body!!.string()
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -136,19 +136,10 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 
-    private fun post(url: String, token: String, callback: Callback) {
-        val handler = Handler()
-        Thread(Runnable {
-            val result = post(url, token)
-            handler.post { callback.onResponse(result) }
-        }).start()
-    }
 
     internal interface Callback {
         fun onResponse(result: String?)
     }
 
-    internal interface ByteCallback {
-        fun onResponse(result: String?)
-    }
+
 }

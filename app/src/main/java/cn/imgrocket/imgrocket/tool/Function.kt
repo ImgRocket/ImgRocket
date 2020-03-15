@@ -10,9 +10,11 @@ import android.widget.Toast
 import cn.imgrocket.imgrocket.tool.APP.Companion.context
 import com.google.gson.Gson
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 import kotlin.String
 
@@ -21,9 +23,9 @@ import kotlin.String
 
 internal object Function {
     fun post(url: String, obj: Any): String? {
-        val JSON = MediaType.parse("application/json; charset=utf-8")
+        val JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
         val okHttpClient = OkHttpClient()
-        val requestBody = RequestBody.create(JSON, Gson().toJson(obj))
+        val requestBody = Gson().toJson(obj).toRequestBody(JSON)
         val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -31,7 +33,7 @@ internal object Function {
         try {
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                return response.body()!!.string()
+                return response.body!!.string()
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -40,9 +42,9 @@ internal object Function {
     }
 
     fun post(url: String, s: String): String? {
-        val string = MediaType.parse("text/text; charset=utf-8")
+        val string = "text/text; charset=utf-8".toMediaTypeOrNull()
         val okHttpClient = OkHttpClient()
-        val requestBody = RequestBody.create(string, s)
+        val requestBody = s.toRequestBody(string)
         val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -50,7 +52,7 @@ internal object Function {
         try {
             val response = okHttpClient.newCall(request).execute()
             if (response.isSuccessful) {
-                return response.body()!!.string()
+                return response.body!!.string()
             }
         } catch (e: IOException) {
             e.printStackTrace()

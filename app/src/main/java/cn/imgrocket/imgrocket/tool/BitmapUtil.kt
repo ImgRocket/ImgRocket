@@ -8,10 +8,15 @@ import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
 import androidx.exifinterface.media.ExifInterface
+import java.io.BufferedOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
 
 
 object BitmapUtil {
+    private fun random(time: Date) = ("${time.time}${(100000..999999).random()}".hashCode() and Integer.MAX_VALUE).toString()
 
     fun load(context: Context, uri: Uri): Bitmap? {
         try {
@@ -24,6 +29,18 @@ object BitmapUtil {
             e.printStackTrace()
         }
         return null
+    }
+
+    @Throws(IOException::class)
+    fun bitmap2FileCache(context: Context, bitmap: Bitmap, quality: Int): File {
+        val file = Storage.getStorageDirectory(context, "cache")
+        val pic = File(file, random(Date()))
+        pic.createNewFile()
+        val bos = BufferedOutputStream(FileOutputStream(pic))
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, bos)
+        bos.flush()
+        bos.close()
+        return pic
     }
 
     private fun load(path: String): Bitmap {

@@ -1,6 +1,7 @@
 package cn.imgrocket.imgrocket
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,7 +30,8 @@ class UserFragment : Fragment() {
         if (global.login) {
             binding.userTextUsername.text = global.username
             binding.userTextUserNumber.text = global.uid
-            //TODO Glide.with(this@UserFragment).load(URL.avatarURL + global.uid).into(binding.userImageUser)
+            Glide.with(this@UserFragment).load(URL.avatarURL + global.uid).into(binding.userImageUser)
+            binding.userImageUser.setColorFilter(Color.TRANSPARENT)
         }
     }
 
@@ -39,7 +41,11 @@ class UserFragment : Fragment() {
 
         binding.userImageUser.setOnClickListener {
             val intent = Intent()
-            activity?.let { it1 -> intent.setClass(it1, LoginActivity::class.java) }
+            if (global.login) {
+                activity?.let { it1 -> intent.setClass(it1, UploadAvatarActivity::class.java) }
+            } else {
+                activity?.let { it1 -> intent.setClass(it1, LoginActivity::class.java) }
+            }
             startActivity(intent)
         }
         binding.userLayoutItem1.setOnClickListener {
