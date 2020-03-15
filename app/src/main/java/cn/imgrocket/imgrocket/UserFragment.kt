@@ -7,10 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.imgrocket.imgrocket.databinding.FragmentUserBinding
+import cn.imgrocket.imgrocket.tool.APP
+import cn.imgrocket.imgrocket.tool.BitmapUtil
 import cn.imgrocket.imgrocket.tool.Function
+import cn.imgrocket.imgrocket.tool.URL
+import com.bumptech.glide.Glide
 
 class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
+    private lateinit var global: APP
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -18,8 +24,19 @@ class UserFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (global.login) {
+            binding.userTextUsername.text = global.username
+            binding.userTextUserNumber.text = global.uid
+            //TODO Glide.with(this@UserFragment).load(URL.avatarURL + global.uid).into(binding.userImageUser)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        global = activity?.application as APP
+
         binding.userImageUser.setOnClickListener {
             val intent = Intent()
             activity?.let { it1 -> intent.setClass(it1, LoginActivity::class.java) }

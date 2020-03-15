@@ -1,19 +1,17 @@
 package cn.imgrocket.imgrocket
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.databinding.ActivityLoginBinding
+import cn.imgrocket.imgrocket.tool.*
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
 import cn.imgrocket.imgrocket.tool.Function.toast
 import cn.imgrocket.imgrocket.tool.Function_Java.salt
-import cn.imgrocket.imgrocket.tool.LoginResult
-import cn.imgrocket.imgrocket.tool.Message
-import cn.imgrocket.imgrocket.tool.Status
-import cn.imgrocket.imgrocket.tool.URL
 import com.google.gson.reflect.TypeToken
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -24,8 +22,10 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var global: APP
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        global = application as APP
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         black(this)
@@ -48,7 +48,13 @@ class LoginActivity : AppCompatActivity() {
                             Status.OK -> {
                                 Log.d(javaClass.name, "登录成功")
                                 message.data?.let {
+                                    global.login = true
+                                    global.token = it.token
+                                    global.username = it.username
+                                    global.uid = it.uid
+                                    toast("登陆成功")
                                     Log.d(javaClass.name, "LoginResult: ${it.uid} ${it.username} ${it.token}")
+                                    finish()
                                 }
                             }
                             Status.UPE -> Log.d(javaClass.name, "密码错误")
@@ -109,7 +115,40 @@ class LoginActivity : AppCompatActivity() {
         }).start()
     }
 
+    private fun post(url: String, token: String): String? {
+        val okHttpClient = OkHttpClient()
+        val formBody = FormBody.Builder()
+                .add("uid", token)
+                .build()
+        val request = Request.Builder()
+                .post(formBody)
+                .url(url)
+                .build()
+        try {
+            val response = okHttpClient.newCall(request).execute()
+            if (response.isSuccessful) {
+                return response.body()!!.string()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        return null
+    }
+
+    private fun post(url: String, token: String, callback: Callback) {
+        val handler = Handler()
+        Thread(Runnable {
+            val result = post(url, token)
+            handler.post { callback.onResponse(result) }
+        }).start()
+    }
+
     internal interface Callback {
+        fun onResponse(result: String?)
+    }
+
+    internal interface ByteCallback {
         fun onResponse(result: String?)
     }
 }
