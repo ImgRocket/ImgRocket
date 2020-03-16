@@ -14,7 +14,7 @@ object Storage {
     fun getStorageDirectory(context: Context, type: String): File? {
         val dir = getExternalStorageDirectory(context, type) ?: getInternalStorageDirectory(context, type)
         dir.mkdirs()
-        Log.d(TAG, dir.path)
+        Log.d(javaClass.name, dir.path)
         return dir
     }
 
@@ -44,6 +44,4 @@ object Storage {
 
         return dir
     }
-
-    const val TAG = "tty.community.file.Storage"
 }

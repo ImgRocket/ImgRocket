@@ -5,6 +5,7 @@
 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fadingEdge="vertical"
     android:scrollbars="vertical">
 
@@ -22,10 +23,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp">
 
-            <ImageView
+            <cn.imgrocket.imgrocket.widget.RoundAngleImageView
                 android:id="@+id/user_image_user"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                app:roundHeight="50dp"
+                app:roundWidth="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:background="?android:attr/selectableItemBackgroundBorderless"

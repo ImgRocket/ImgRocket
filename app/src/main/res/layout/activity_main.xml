@@ -10,10 +10,12 @@
         android:layout_height="48dp"
         android:background="@color/colorPrimaryDark">
 
-        <ImageView
+        <cn.imgrocket.imgrocket.widget.RoundAngleImageView
             android:id="@+id/main_img_avatar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:roundWidth="16dp"
+            app:roundHeight="16dp"
             android:layout_alignParentStart="true"
             android:layout_margin="8dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
