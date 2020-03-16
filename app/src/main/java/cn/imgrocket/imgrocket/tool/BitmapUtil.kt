@@ -16,7 +16,7 @@ import java.util.*
 
 
 object BitmapUtil {
-    private fun random(time: Date) = ("${time.time}${(100000..999999).random()}".hashCode() and Integer.MAX_VALUE).toString()
+    fun random(time: Date) = ("${time.time}${(100000..999999).random()}".hashCode() and Integer.MAX_VALUE).toString()
 
     fun load(context: Context, uri: Uri): Bitmap? {
         try {

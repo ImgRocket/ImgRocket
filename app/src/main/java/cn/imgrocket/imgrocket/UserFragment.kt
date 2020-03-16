@@ -30,7 +30,7 @@ class UserFragment : Fragment() {
         if (global.login) {
             binding.userTextUsername.text = global.username
             binding.userTextUserNumber.text = global.uid
-            Glide.with(this@UserFragment).load(URL.avatarURL + global.uid).into(binding.userImageUser)
+            Glide.with(this@UserFragment).load(URL.avatarURL + global.uid + "&a=" + Math.random()).into(binding.userImageUser)
             binding.userImageUser.setColorFilter(Color.TRANSPARENT)
         }
     }

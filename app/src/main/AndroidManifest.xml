@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".UploadAvatarActivity"></activity>
+        <activity android:name=".UploadAvatarActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".ChooseMultiPhotoActivity" />
         <activity android:name=".HelpActivity" />
@@ -27,6 +27,10 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".LoginActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

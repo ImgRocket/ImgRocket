@@ -13,6 +13,7 @@ import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.URL
 import com.bumptech.glide.Glide
 import java.io.File
+import java.lang.Math.random
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (global.login) {
-            Glide.with(this).load(URL.avatarURL + global.uid).into(binding.mainImgAvatar)
+            Glide.with(this).load(URL.avatarURL + global.uid + "&a=" + random()).into(binding.mainImgAvatar)
             binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
         }
     }
