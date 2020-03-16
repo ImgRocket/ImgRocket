@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import cn.imgrocket.imgrocket.databinding.FragmentUserBinding
 import cn.imgrocket.imgrocket.tool.APP
-import cn.imgrocket.imgrocket.tool.BitmapUtil
 import cn.imgrocket.imgrocket.tool.Function
 import cn.imgrocket.imgrocket.tool.URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserBinding
@@ -25,15 +25,6 @@ class UserFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (global.login) {
-            binding.userTextUsername.text = global.username
-            binding.userTextUserNumber.text = global.uid
-            Glide.with(this@UserFragment).load(URL.avatarURL + global.uid + "&a=" + Math.random()).into(binding.userImageUser)
-            binding.userImageUser.setColorFilter(Color.TRANSPARENT)
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,4 +56,17 @@ class UserFragment : Fragment() {
         }
     }
 
+    public fun refreshAvatar() {
+        if (global.login) {
+            binding.userTextUsername.text = global.username
+            binding.userTextUserNumber.text = global.uid
+            Glide
+                    .with(this@UserFragment)
+                    .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.userImageUser)
+            binding.userImageUser.setColorFilter(Color.TRANSPARENT)
+        }
+
+    }
 }

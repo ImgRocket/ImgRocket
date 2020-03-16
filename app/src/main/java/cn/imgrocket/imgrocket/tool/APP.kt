@@ -10,6 +10,7 @@ class APP : Application() {
     var username: String? = null
     var uid: String? = null
     var login: Boolean = false
+    var avatarVersion: Int = 0
     override fun onCreate() {
         super.onCreate()
         context = applicationContext

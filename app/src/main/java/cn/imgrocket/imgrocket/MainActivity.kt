@@ -12,22 +12,14 @@ import cn.imgrocket.imgrocket.tool.APP
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.File
-import java.lang.Math.random
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: SimplePageFragmentAdapter
     private lateinit var binding: ActivityMainBinding
     private lateinit var global: APP
-
-    override fun onStart() {
-        super.onStart()
-        if (global.login) {
-            Glide.with(this).load(URL.avatarURL + global.uid + "&a=" + random()).into(binding.mainImgAvatar)
-            binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,11 +73,27 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_processing -> {
                     binding.mainImgAvatar.visibility = View.VISIBLE
+                    if (global.login) {
+                        Glide
+                                .with(this)
+                                .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .into(binding.mainImgAvatar)
+                        binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
+                    }
                     binding.mainPageView.currentItem = 0
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.menu_done -> {
                     binding.mainImgAvatar.visibility = View.VISIBLE
+                    if (global.login) {
+                        Glide
+                                .with(this)
+                                .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .into(binding.mainImgAvatar)
+                        binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
+                    }
                     binding.mainPageView.currentItem = 1
                     return@setOnNavigationItemSelectedListener true
                 }

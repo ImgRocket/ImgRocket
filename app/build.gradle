@@ -29,7 +29,7 @@ android {
         enabled = true
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     def mainVersionName = "0.1"
 
     def currentVersionCode = getVersionCode()
