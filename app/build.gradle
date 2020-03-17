@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'kotlin-kapt'
 
 def getVersionCode() {
     def versionFile = file('version.properties')
@@ -73,9 +73,17 @@ dependencies {
     implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'android.arch.persistence.room:runtime:1.1.1'
     implementation 'com.github.yalantis:ucrop:2.2.4'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // dependencies of androidx.room
+    def room_version = "2.2.4"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
 }
 repositories {
