@@ -30,5 +30,6 @@
     <string name="please_choose_pictures">请选择图片</string>
     <string name="create_your_imgrocket_account">注册账号</string>
     <string name="sign_up">注册</string>
+    <string name="avatar">头像</string>
 
 </resources>

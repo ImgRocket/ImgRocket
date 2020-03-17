@@ -6,10 +6,12 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.fragment.app.Fragment
 import cn.imgrocket.imgrocket.databinding.FragmentUserBinding
 import cn.imgrocket.imgrocket.tool.*
 import cn.imgrocket.imgrocket.tool.Function
@@ -39,6 +41,11 @@ class UserFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        refreshAvatar()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == Activity.RESULT_OK) {
@@ -51,9 +58,9 @@ class UserFragment : Fragment() {
             activity?.let {
                 context?.let { it1 ->
                     UCrop.of(result[0], destinationUri)
-                        .withAspectRatio(1F, 1F)
-                        .withMaxResultSize(512, 512)
-                        .start(it1, this)
+                            .withAspectRatio(1F, 1F)
+                            .withMaxResultSize(512, 512)
+                            .start(it1, this)
 
                 }
             }
@@ -110,6 +117,20 @@ class UserFragment : Fragment() {
         binding.userLayoutItem5.setOnClickListener {
             Function.toast(resources.getString(R.string.this_function_is_unavailable))
         }
+        binding.userSeekRound.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                val density = context?.resources?.displayMetrics?.density
+                binding.userImageUser.setRound((progress * density!! + 0.5).toInt())
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+
+
     }
 
     private fun refreshAvatar() {
@@ -117,9 +138,9 @@ class UserFragment : Fragment() {
             binding.userTextUsername.text = global.username
             binding.userTextUserNumber.text = global.uid
             Glide.with(this@UserFragment)
-                .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(binding.userImageUser)
+                    .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.userImageUser)
             binding.userImageUser.setColorFilter(Color.TRANSPARENT)
         }
     }
@@ -164,3 +185,5 @@ class UserFragment : Fragment() {
         private const val REQUEST_CODE_CHOOSE = 111
     }
 }
+
+
