@@ -2,18 +2,17 @@ package cn.imgrocket.imgrocket
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.imgrocket.imgrocket.adapter.ProcessingRecyclerAdapter
 import cn.imgrocket.imgrocket.databinding.FragmentProcessingBinding
 
 class ProcessingFragment : Fragment() {
     private lateinit var binding: FragmentProcessingBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProcessingBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -1,6 +1,7 @@
 package cn.imgrocket.imgrocket
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
 import cn.imgrocket.imgrocket.databinding.FragmentUserBinding
+import cn.imgrocket.imgrocket.room.model.User
 import cn.imgrocket.imgrocket.tool.*
 import cn.imgrocket.imgrocket.tool.Function
 import com.bumptech.glide.Glide
@@ -32,12 +34,18 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-class UserFragment : Fragment() {
+class UserFragment : Fragment(), UserStateChangeListener {
     private lateinit var binding: FragmentUserBinding
     private lateinit var global: APP
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is MainActivity) {
+            context.addOnUserStateChangeListener(this)
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -144,6 +152,18 @@ class UserFragment : Fragment() {
         }
     }
 
+    private fun refreshAvatar(user: User?) {
+        user?.apply {
+            binding.userTextUsername.text = username
+            binding.userTextUserNumber.text = uid
+            Glide.with(this@UserFragment)
+                    .load(URL.avatarURL + uid + "&version=" + global.avatarVersion)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(binding.userImageUser)
+            binding.userImageUser.setColorFilter(Color.TRANSPARENT)
+        }
+    }
+
     private fun post(url: String, uid: String, token: String, portrait: File): String? {
         val okHttpClient = OkHttpClient()
         val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -182,6 +202,11 @@ class UserFragment : Fragment() {
 
     companion object {
         private const val REQUEST_CODE_CHOOSE = 111
+    }
+
+    override fun onUserChange(user: User?) {
+        Log.d(javaClass.name, "onUserChange $user")
+        refreshAvatar(user)
     }
 }
 

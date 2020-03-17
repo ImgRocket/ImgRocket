@@ -40,5 +40,5 @@ interface UserDao {
     fun loadUser(): User?
 
     @Query("SELECT * FROM user where enable >= 0 LIMIT 1")
-    fun autoUpdateLoadUser(): LiveData<Array<User>>
+    fun autoUpdateLoadUser(): LiveData<User?>
 }
