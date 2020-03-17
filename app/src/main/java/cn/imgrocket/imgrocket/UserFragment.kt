@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class UserFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(javaClass.name, "UserFragment OnResume ${global.user}")
         refreshAvatar()
     }
 
@@ -55,19 +57,18 @@ class UserFragment : Fragment() {
             val pic = File(file, BitmapUtil.random(Date()))
             pic.createNewFile()
             val destinationUri = Uri.fromFile(pic)
-            activity?.let {
-                context?.let { it1 ->
-                    UCrop.of(result[0], destinationUri)
-                            .withAspectRatio(1F, 1F)
-                            .withMaxResultSize(512, 512)
-                            .start(it1, this)
 
-                }
+            context?.let { it1 ->
+                UCrop.of(result[0], destinationUri)
+                        .withAspectRatio(1F, 1F)
+                        .withMaxResultSize(512, 512)
+                        .start(it1, this)
+
             }
         } else if (resultCode == Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             val resultUri: Uri? = UCrop.getOutput(data!!)
             val avatar = activity?.let { BitmapUtil.load(it, resultUri!!) }
-            post(URL.uploadAvatarURL, global.uid!!, global.token!!, BitmapUtil.bitmap2FileCache(APP.context, avatar!!, 85), object : Callback {
+            post(URL.uploadAvatarURL, global.user?.uid!!, global.user?.token!!, BitmapUtil.bitmap2FileCache(APP.context, avatar!!, 85), object : Callback {
                 override fun onResponse(result: String?) {
                     Function.toast(result!!)
                     global.avatarVersion++
@@ -86,7 +87,7 @@ class UserFragment : Fragment() {
 
         binding.userImageUser.setOnClickListener {
             val intent = Intent()
-            if (global.login) {
+            if (global.user != null) {
 //                activity?.let { it1 -> intent.setClass(it1, UploadAvatarActivity::class.java) }
                 Matisse.from(this)
                         .choose(MimeType.ofImage())
@@ -129,16 +130,14 @@ class UserFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
-
-
     }
 
     private fun refreshAvatar() {
-        if (global.login) {
-            binding.userTextUsername.text = global.username
-            binding.userTextUserNumber.text = global.uid
+        global.user?.apply {
+            binding.userTextUsername.text = username
+            binding.userTextUserNumber.text = uid
             Glide.with(this@UserFragment)
-                    .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                    .load(URL.avatarURL + uid + "&version=" + global.avatarVersion)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.userImageUser)
             binding.userImageUser.setColorFilter(Color.TRANSPARENT)

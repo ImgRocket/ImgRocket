@@ -3,11 +3,15 @@ package cn.imgrocket.imgrocket
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.room.Room
 import androidx.viewpager.widget.ViewPager
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import cn.imgrocket.imgrocket.databinding.ActivityMainBinding
+import cn.imgrocket.imgrocket.room.AppDatabase
 import cn.imgrocket.imgrocket.tool.APP
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.URL
@@ -45,6 +49,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        global.database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database").allowMainThreadQueries().build()
+        global.userDao = global.database.userDao()
+        global.user = global.userDao.loadUser()
+//        global.userData = global.userDao.autoUpdateLoadUser()
+//        global.userData.observe(this, Observer {
+//            global.user = if (it.isNotEmpty()) it[0] else null
+//        })
+
         setContentView(binding.root)
 
         black(this)
@@ -62,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.mainImgAvatar.setOnClickListener {
             val intent = Intent()
-            if (global.login) {
+            if (global.user != null) {
                 intent.setClass(this, UploadAvatarActivity::class.java)
             } else {
                 intent.setClass(this, LoginActivity::class.java)
@@ -73,10 +86,9 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_processing -> {
                     binding.mainImgAvatar.visibility = View.VISIBLE
-                    if (global.login) {
-                        Glide
-                                .with(this)
-                                .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                    global.user?.apply {
+                        Glide.with(this@MainActivity)
+                                .load(URL.avatarURL + uid + "&version=" + global.avatarVersion)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(binding.mainImgAvatar)
                         binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
@@ -86,10 +98,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_done -> {
                     binding.mainImgAvatar.visibility = View.VISIBLE
-                    if (global.login) {
-                        Glide
-                                .with(this)
-                                .load(URL.avatarURL + global.uid + "&version=" + global.avatarVersion)
+                    global.user?.apply {
+                        Glide.with(this@MainActivity)
+                                .load(URL.avatarURL + uid + "&version=" + global.avatarVersion)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .into(binding.mainImgAvatar)
                         binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)

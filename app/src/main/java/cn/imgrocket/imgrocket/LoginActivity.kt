@@ -7,6 +7,7 @@ import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.databinding.ActivityLoginBinding
+import cn.imgrocket.imgrocket.room.model.User
 import cn.imgrocket.imgrocket.tool.*
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.Function.getSalt
@@ -49,10 +50,10 @@ class LoginActivity : AppCompatActivity() {
                             Status.OK -> {
                                 Log.d(javaClass.name, "登录成功")
                                 message.data?.let {
-                                    global.login = true
-                                    global.token = it.token
-                                    global.username = it.username
-                                    global.uid = it.uid
+                                    global.userDao.invalidateAll()
+                                    val user = User(it.uid, it.username, it.token, 0)
+                                    global.userDao.insertUsers(user)
+                                    global.user = global.userDao.loadUser()
                                     toast("登陆成功")
                                     Log.d(javaClass.name, "LoginResult: ${it.uid} ${it.username} ${it.token}")
                                     finish()

@@ -68,7 +68,7 @@ class UploadAvatarActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             val resultUri: Uri? = UCrop.getOutput(data!!)
             val avatar = load(this, resultUri!!)
-            post(URL.uploadAvatarURL, global.uid!!, global.token!!, bitmap2FileCache(context, avatar!!, 85), object : Callback {
+            post(URL.uploadAvatarURL, global.user?.uid!!, global.user?.token!!, bitmap2FileCache(context, avatar!!, 85), object : Callback {
                 override fun onResponse(result: String?) {
                     toast(result!!)
                     global.avatarVersion++
