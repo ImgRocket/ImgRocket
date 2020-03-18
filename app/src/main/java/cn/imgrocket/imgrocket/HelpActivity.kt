@@ -22,12 +22,9 @@ class HelpActivity : AppCompatActivity() {
         helpImgCircles = arrayListOf(binding.helpImgCircle1, binding.helpImgCircle2, binding.helpImgCircle3, binding.helpImgCircle4, binding.helpImgCircle5)
         currentPage(helpImgCircles, 1)
         binding.helpPageView.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
+            override fun onPageScrollStateChanged(state: Int) {}
 
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
                 currentPage(helpImgCircles, position + 1)

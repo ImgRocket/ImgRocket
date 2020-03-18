@@ -12,8 +12,7 @@ import cn.imgrocket.imgrocket.databinding.FragmentDoneBinding
 class DoneFragment : Fragment() {
     private lateinit var binding: FragmentDoneBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDoneBinding.inflate(inflater, container, false)
         return binding.root
     }

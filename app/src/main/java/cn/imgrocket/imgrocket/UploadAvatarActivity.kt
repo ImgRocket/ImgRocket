@@ -32,11 +32,13 @@ import java.util.*
 
 class UploadAvatarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadAvatarBinding
-    private lateinit var global: APP
+    private val global: APP by lazy {
+        application as APP
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        global = application as APP
+//        global = application as APP
         binding = ActivityUploadAvatarBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Matisse.from(this@UploadAvatarActivity)
@@ -78,7 +80,7 @@ class UploadAvatarActivity : AppCompatActivity() {
                 }
             })
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            val cropError = UCrop.getError(data!!)
+            val cropError = UCrop.getError(data!!)?.apply { printStackTrace() }
             toast("error")
             finish()
         }

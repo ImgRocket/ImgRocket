@@ -11,6 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
@@ -36,18 +39,18 @@ import java.util.*
 
 class UserFragment : Fragment(), UserStateChangeListener {
     private lateinit var binding: FragmentUserBinding
-    private lateinit var global: APP
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if(context is MainActivity) {
-            context.addOnUserStateChangeListener(this)
-        }
+    private val global: APP by lazy {
+        activity?.application as APP
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        global.addOnUserStateChangeListener(this)
     }
 
     override fun onResume() {
@@ -91,7 +94,7 @@ class UserFragment : Fragment(), UserStateChangeListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        global = activity?.application as APP
+//        global = activity?.application as APP
 
         binding.userImageUser.setOnClickListener {
             val intent = Intent()
@@ -160,6 +163,7 @@ class UserFragment : Fragment(), UserStateChangeListener {
                     .load(URL.avatarURL + uid + "&version=" + global.avatarVersion)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.userImageUser)
+
             binding.userImageUser.setColorFilter(Color.TRANSPARENT)
         }
     }
@@ -197,6 +201,11 @@ class UserFragment : Fragment(), UserStateChangeListener {
 
     internal interface Callback {
         fun onResponse(result: String?)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        global.removeOnUserStateChangeListener(this)
     }
 
 

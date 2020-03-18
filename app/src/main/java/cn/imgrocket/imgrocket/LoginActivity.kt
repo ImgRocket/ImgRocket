@@ -24,10 +24,10 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var global: APP
+    private val global: APP by lazy { application as APP }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        global = application as APP
+//        global = application as APP
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         black(this)

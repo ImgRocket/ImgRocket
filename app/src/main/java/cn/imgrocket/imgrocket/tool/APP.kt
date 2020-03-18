@@ -4,26 +4,42 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
-import cn.imgrocket.imgrocket.MainActivity
 import cn.imgrocket.imgrocket.room.AppDatabase
 import cn.imgrocket.imgrocket.room.model.User
 import cn.imgrocket.imgrocket.room.model.UserDao
 import kotlin.properties.Delegates
-import kotlin.reflect.KProperty
 
 class APP : Application() {
     lateinit var userData: LiveData<User?>
-    var user: User? = null
-    var avatarVersion by Delegates.observable(0) { _, _: Int, new: Int ->
-        for (listener in listeners) {
-            listener.onAvatarChange(new)
+    var user: User? by Delegates.vetoable<User?>(null) { _, _, user ->
+        for (listener in userStateListeners) {
+            listener.onUserChange(user)
+        }
+        return@vetoable true
+    }
+
+    var avatarVersion by Delegates.observable(0) { _, _, version ->
+        for (listener in avatarListeners) {
+            listener.onAvatarChange(version)
         }
     }
 
-    private val listeners = HashSet<AvatarListener>()
+    private val avatarListeners = HashSet<AvatarListener>()
     fun addAvatarChangeListener(listener: AvatarListener) {
-        listeners.add(listener)
+        avatarListeners.add(listener)
     }
+    fun removeAvatarChangeListener(listener: AvatarListener) {
+        avatarListeners.remove(listener)
+    }
+
+    private val userStateListeners = HashSet<UserStateChangeListener>()
+    fun addOnUserStateChangeListener(listener: UserStateChangeListener) {
+        userStateListeners.add(listener)
+    }
+    fun removeOnUserStateChangeListener(listener: UserStateChangeListener) {
+        userStateListeners.remove(listener)
+    }
+
 
     lateinit var database: AppDatabase
     lateinit var userDao: UserDao
@@ -35,7 +51,8 @@ class APP : Application() {
 
     override fun onTerminate() {
         super.onTerminate()
-        listeners.clear()
+        avatarListeners.clear()
+        userStateListeners.clear()
     }
 
     companion object {
@@ -47,6 +64,11 @@ class APP : Application() {
 interface AvatarListener {
     fun onAvatarChange(avatarVersion: Int)
 }
+
+interface UserStateChangeListener {
+    fun onUserChange(user: User?)
+}
+
 
 /*
 委托
