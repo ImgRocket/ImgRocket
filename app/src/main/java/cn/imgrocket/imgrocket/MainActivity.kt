@@ -130,8 +130,8 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
     }
 
     private fun View.fadeOutAndHide() {
-        if (this@fadeOutAndHide.visibility == View.GONE) { return }
-        val fadeOut: Animation = AlphaAnimation(1f, 0f)
+        val before = if (this@fadeOutAndHide.visibility == View.GONE) 0f else 1f
+        val fadeOut: Animation = AlphaAnimation(before, 0f)
         fadeOut.interpolator = AccelerateInterpolator()
         fadeOut.duration = 200
         fadeOut.setAnimationListener(object : Animation.AnimationListener {
@@ -145,10 +145,10 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
     }
 
     private fun View.fadeInAndShow() {
-        if (this@fadeInAndShow.visibility == View.VISIBLE) { return }
-        val fadeIn: Animation = AlphaAnimation(0f, 1f)
+        val before = if (this@fadeInAndShow.visibility == View.VISIBLE) 1f else 0f
+        val fadeIn: Animation = AlphaAnimation(before, 1f)
         fadeIn.interpolator = AccelerateInterpolator()
-        fadeIn.duration = 500
+        fadeIn.duration = 200
         fadeIn.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationEnd(animation: Animation?) {
                 this@fadeInAndShow.visibility = View.VISIBLE
