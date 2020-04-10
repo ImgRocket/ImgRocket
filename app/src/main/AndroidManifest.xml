@@ -18,6 +18,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
+        <activity android:name=".EggActivity" />
         <activity android:name=".UploadAvatarActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".ChooseMultiPhotoActivity" />
@@ -44,6 +45,15 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+
+        <receiver android:name=".EggListener">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data
+                    android:host="923520"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

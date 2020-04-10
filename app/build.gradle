@@ -68,7 +68,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'pub.devrel:easypermissions:1.0.1'
-    implementation 'androidx.exifinterface:exifinterface:1.1.0'
+    implementation 'androidx.exifinterface:exifinterface:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'com.squareup.picasso:picasso:2.5.2'
@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // dependencies of androidx.room
-    def room_version = "2.2.4"
+    def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
