@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,25 +21,37 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/login_edit_account"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:autofillHints="账号"
-            android:gravity="center"
-            android:hint="@string/account"
-            android:inputType="textPersonName" />
+            app:counterEnabled="true"
+            app:counterMaxLength="20">
 
-        <EditText
-            android:id="@+id/login_edit_password"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_edit_account"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints="账号"
+                android:hint="@string/account"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:autofillHints="密码"
-            android:gravity="center"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints="密码"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/login_button_login"

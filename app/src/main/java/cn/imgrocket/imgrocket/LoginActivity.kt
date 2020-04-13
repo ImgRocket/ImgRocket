@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.databinding.ActivityLoginBinding
@@ -33,6 +35,18 @@ class LoginActivity : AppCompatActivity() {
         black(this)
         val locale: String = Locale.getDefault().language
         if (locale != "zh") binding.loginTextTip.textSize = 18F
+        binding.loginEditAccount.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                binding.loginButtonLogin.isEnabled = binding.loginEditAccount.text!!.length <= 20
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
         binding.loginButtonLogin.setOnClickListener {
             val account = binding.loginEditAccount.text.toString()
             val password = binding.loginEditPassword.text.toString()

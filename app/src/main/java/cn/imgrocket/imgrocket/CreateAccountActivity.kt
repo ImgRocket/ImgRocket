@@ -1,7 +1,10 @@
 package cn.imgrocket.imgrocket
 
 import android.os.Bundle
+
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 
 import androidx.appcompat.app.AppCompatActivity
@@ -28,17 +31,23 @@ class CreateAccountActivity : AppCompatActivity() {
         binding = ActivityCreateAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
         black(this)
+        binding.createEditAccount.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                binding.createButtonSign.isEnabled = binding.createEditAccount.text!!.length <= 20
+            }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
         binding.createButtonSign.setOnClickListener {
             val account = binding.createEditAccount.text.toString()
             val password = binding.createEditPassword.text.toString()
-            val password2 = binding.createEditPassword2.text.toString()
             if (password.length < 6) {
                 toast("密码长度至少为6位")
-                return@setOnClickListener
-            }
-            if (password != password2) {
-                toast("两次输入的密码不同")
                 return@setOnClickListener
             }
             post(URL.signURL, account, salt(password, getSalt()), object : Callback {
