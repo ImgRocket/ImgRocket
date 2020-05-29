@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 public class Function_Java {
     public static String salt(String string, String salt) {
         String text = string + salt;
