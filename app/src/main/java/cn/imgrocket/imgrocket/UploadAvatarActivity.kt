@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.databinding.ActivityUploadAvatarBinding
 import cn.imgrocket.imgrocket.tool.APP
@@ -81,7 +82,7 @@ class UploadAvatarActivity : AppCompatActivity() {
             })
         } else if (resultCode == UCrop.RESULT_ERROR) {
             val cropError = UCrop.getError(data!!)?.apply { printStackTrace() }
-            toast("error")
+            Log.e("crop error", cropError.toString())
             finish()
         }
     }
