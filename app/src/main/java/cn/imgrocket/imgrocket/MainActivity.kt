@@ -1,5 +1,6 @@
 package cn.imgrocket.imgrocket
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -16,22 +17,25 @@ import cn.imgrocket.imgrocket.databinding.ActivityMainBinding
 import cn.imgrocket.imgrocket.room.AppDatabase
 import cn.imgrocket.imgrocket.room.model.User
 import cn.imgrocket.imgrocket.tool.APP
+import cn.imgrocket.imgrocket.tool.APP.Companion.context
 import cn.imgrocket.imgrocket.tool.AvatarListener
 import cn.imgrocket.imgrocket.tool.Function.black
 import cn.imgrocket.imgrocket.tool.URL
 import cn.imgrocket.imgrocket.tool.UserStateChangeListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 
-
-class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListener {
+class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListener, EasyPermissions.PermissionCallbacks {
     private lateinit var adapter: SimplePageFragmentAdapter
     private lateinit var binding: ActivityMainBinding
+    private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
     private val global: APP by lazy { application as APP }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getPermission()
         when (intent.extras?.get("Function")) {
             1 -> {
                 val intent = Intent()
@@ -138,6 +142,7 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
             override fun onAnimationEnd(animation: Animation?) {
                 this@fadeOutAndHide.visibility = View.GONE
             }
+
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationStart(animation: Animation?) {}
         })
@@ -153,6 +158,7 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
             override fun onAnimationEnd(animation: Animation?) {
                 this@fadeInAndShow.visibility = View.VISIBLE
             }
+
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationStart(animation: Animation?) {}
         })
@@ -191,6 +197,20 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.mainImgAvatar)
             binding.mainImgAvatar.setColorFilter(Color.TRANSPARENT)
+        }
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    private fun getPermission() {
+        if (!EasyPermissions.hasPermissions(context, *permissions)) {
+            EasyPermissions.requestPermissions(this, resources.getString(R.string.photo_permission), 1, *permissions)
         }
     }
 }

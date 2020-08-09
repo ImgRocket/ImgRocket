@@ -1,6 +1,7 @@
 package cn.imgrocket.imgrocket.helpfragment
 
 import android.Manifest
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,22 +29,25 @@ class HelpFragment5 : Fragment(), EasyPermissions.PermissionCallbacks {
         getPermission()
         binding.help5BtnFinish.setOnClickListener {
             val file = File((context?.filesDir?.path) + "/notNew")
-            val output = FileOutputStream(file)
+            FileOutputStream(file)
             activity?.finish()
         }
     }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
 
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
 
     }
 
     private fun getPermission() {
-        if (!EasyPermissions.hasPermissions(context, *permissions)) {
-            EasyPermissions.requestPermissions(this, resources.getString(R.string.photo_permission), 1, *permissions)
+        val context = context;
+        context?.let { it ->
+            if (!EasyPermissions.hasPermissions(it, *permissions)) {
+                EasyPermissions.requestPermissions(this, resources.getString(R.string.photo_permission), 1, *permissions)
+            }
         }
     }
 }
