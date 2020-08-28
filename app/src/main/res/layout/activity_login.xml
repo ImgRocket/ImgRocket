@@ -117,8 +117,8 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:src="@mipmap/ic_wechat"
-            android:tint="@color/green_md300"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/green_md300" />
 
         <ImageView
             android:id="@+id/login_img_qq"
@@ -129,8 +129,8 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:src="@mipmap/ic_qq"
-            android:tint="@color/red_md300"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/red_md300" />
 
         <ImageView
             android:id="@+id/login_img_alipay"
@@ -141,7 +141,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="4dp"
             android:src="@mipmap/ic_alipay"
-            android:tint="@color/blue_md300"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/blue_md300" />
     </RelativeLayout>
 </RelativeLayout>

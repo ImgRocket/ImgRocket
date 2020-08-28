@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,8 +26,8 @@
             android:layout_margin="2dp"
             android:layout_toStartOf="@id/help_img_circle2"
             android:src="@drawable/ic_lens_black_24dp"
-            android:tint="@color/colorPrimary"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/colorPrimary" />
 
         <ImageView
             android:id="@+id/help_img_circle2"
@@ -36,8 +37,8 @@
             android:layout_margin="2dp"
             android:layout_toStartOf="@id/help_img_circle3"
             android:src="@drawable/ic_lens_black_24dp"
-            android:tint="@color/colorPrimary"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/colorPrimary" />
 
         <ImageView
             android:id="@+id/help_img_circle3"
@@ -46,8 +47,8 @@
             android:layout_centerInParent="true"
             android:layout_margin="2dp"
             android:src="@drawable/ic_lens_black_24dp"
-            android:tint="@color/colorPrimary"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/colorPrimary" />
 
         <ImageView
             android:id="@+id/help_img_circle4"
@@ -56,8 +57,8 @@
             android:layout_margin="2dp"
             android:layout_toEndOf="@+id/help_img_circle3"
             android:src="@drawable/ic_panorama_fish_eye_black_24dp"
-            android:tint="@color/colorPrimary"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/colorPrimary" />
 
         <ImageView
             android:id="@+id/help_img_circle5"
@@ -66,7 +67,7 @@
             android:layout_margin="2dp"
             android:layout_toEndOf="@+id/help_img_circle4"
             android:src="@drawable/ic_panorama_fish_eye_black_24dp"
-            android:tint="@color/colorPrimary"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/colorPrimary" />
     </RelativeLayout>
 </RelativeLayout>

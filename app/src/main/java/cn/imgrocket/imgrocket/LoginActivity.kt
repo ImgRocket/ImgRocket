@@ -7,6 +7,7 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import cn.imgrocket.imgrocket.databinding.ActivityLoginBinding
 import cn.imgrocket.imgrocket.room.model.User
@@ -73,8 +74,14 @@ class LoginActivity : AppCompatActivity() {
                                     finish()
                                 }
                             }
-                            Status.UPE -> Log.d(javaClass.name, "密码错误")
-                            Status.UNE -> Log.d(javaClass.name, "用户不存在")
+                            Status.UPE -> {
+                                toast("密码错误")
+                                Log.d(javaClass.name, "密码错误")
+                            }
+                            Status.UNE -> {
+                                toast("用户不存在")
+                                Log.d(javaClass.name, "用户不存在")
+                            }
                             else -> Log.d(javaClass.name, "其他错误")
                         }
 

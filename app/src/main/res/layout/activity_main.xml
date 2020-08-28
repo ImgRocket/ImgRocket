@@ -40,8 +40,8 @@
             android:layout_margin="10dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_help_outline_black_24dp"
-            android:tint="@color/grey"
-            tools:ignore="contentDescription" />
+            tools:ignore="contentDescription"
+            app:tint="@color/grey" />
 
     </RelativeLayout>
 
