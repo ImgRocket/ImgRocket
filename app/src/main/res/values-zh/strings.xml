@@ -32,5 +32,9 @@
     <string name="sign_up">注册</string>
     <string name="avatar">头像</string>
     <string name="exchange">兑换码</string>
+    <string name="submit">提交</string>
+    <string name="money">余额</string>
+    <string name="balance">余额</string>
+    <string name="buy">购买</string>
 
 </resources>

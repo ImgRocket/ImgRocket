@@ -118,7 +118,8 @@ class UserFragment : Fragment(), UserStateChangeListener {
             Function.toast(resources.getString(R.string.this_function_is_unavailable))
         }
         binding.userLayoutItem2.setOnClickListener {
-            Function.toast(resources.getString(R.string.this_function_is_unavailable))
+            val intent = Intent(context, ExchangeActivity::class.java)
+            startActivity(intent)
         }
         binding.userLayoutItem3.setOnClickListener {
             Function.toast(resources.getString(R.string.this_function_is_unavailable))

@@ -32,4 +32,8 @@
     <string name="sign_up">sign up</string>
     <string name="avatar">Avatar</string>
     <string name="exchange">Redemption Code</string>
+    <string name="submit">submit</string>
+    <string name="money">money</string>
+    <string name="balance">balance</string>
+    <string name="buy">buy</string>
 </resources>

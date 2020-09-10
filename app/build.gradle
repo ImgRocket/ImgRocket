@@ -28,7 +28,7 @@ android {
         viewBinding = true
     }
     compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "30.0.2"
     def mainVersionName = "0.1"
 
     def currentVersionCode = getVersionCode()
