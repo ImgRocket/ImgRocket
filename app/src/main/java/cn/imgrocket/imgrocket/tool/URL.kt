@@ -5,4 +5,7 @@ object URL {
     const val signURL = "https://user.imgrocket.cn/register"
     const val avatarURL = "https://user.imgrocket.cn/portrait/get?uid="
     const val uploadAvatarURL = "https://user.imgrocket.cn/portrait/update"
+    const val queryCodeUsageURL = "https://user.imgrocket.cn/code/query"
+    const val trailCodeURL = "https://user.imgrocket.cn/code/trail"
+    const val exchangeCodeURL = "https://user.imgrocket.cn/code/use"
 }
