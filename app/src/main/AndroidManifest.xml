@@ -18,13 +18,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
-        <activity android:name=".ExchangeActivity" />
+        <activity android:name=".ExchangeActivity"/>
         <activity android:name=".EggActivity" />
         <activity android:name=".UploadAvatarActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".ChooseMultiPhotoActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".TestActivity" />
         <activity android:name=".VipInformationActivity" />
         <activity android:name=".UploadActivity" />
         <activity android:name=".ChooseSinglePhotoActivity" />

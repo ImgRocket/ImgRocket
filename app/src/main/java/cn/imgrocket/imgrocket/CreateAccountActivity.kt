@@ -93,10 +93,10 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private fun post(url: String, account: String, password: String, callback: Callback) {
         val handler = Handler()
-        Thread(Runnable {
+        Thread {
             val result = post(url, account, password)
             handler.post { callback.onResponse(result) }
-        }).start()
+        }.start()
     }
 
     internal interface Callback {

@@ -113,10 +113,10 @@ class UploadAvatarActivity : AppCompatActivity() {
 
     private fun post(url: String, uid: String, token: String, portrait: File, callback: Callback) {
         val handler = Handler()
-        Thread(Runnable {
+        Thread {
             val result = post(url, uid, token, portrait)
             handler.post { callback.onResponse(result) }
-        }).start()
+        }.start()
     }
 
 
