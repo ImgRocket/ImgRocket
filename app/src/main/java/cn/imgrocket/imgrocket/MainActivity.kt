@@ -174,6 +174,7 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
         adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(ProcessingFragment(), DoneFragment(), UserFragment()))
         binding.mainPageView.adapter = adapter
         binding.mainPageView.currentItem = 0
+        binding.mainPageView.offscreenPageLimit = 2
 
         getProgress()
     }
