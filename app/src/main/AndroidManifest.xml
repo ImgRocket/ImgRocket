@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="q">
-        <activity android:name=".ExchangeActivity"></activity>
+        <activity android:name=".ExchangeActivity" />
         <activity android:name=".EggActivity" />
         <activity android:name=".UploadAvatarActivity" />
         <activity android:name=".CreateAccountActivity" />

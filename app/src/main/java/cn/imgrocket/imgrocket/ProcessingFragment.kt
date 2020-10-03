@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.imgrocket.imgrocket.adapter.ProcessingRecyclerAdapter
 import cn.imgrocket.imgrocket.databinding.FragmentProcessingBinding
+import cn.imgrocket.imgrocket.room.model.TaskItem
 
-class ProcessingFragment : Fragment() {
+class ProcessingFragment : Fragment(), MainActivity.OnProgressUpdateListener {
     private lateinit var binding: FragmentProcessingBinding
+
+    private lateinit var adapter: ProcessingRecyclerAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentProcessingBinding.inflate(inflater, container, false)
         return binding.root
@@ -19,15 +22,11 @@ class ProcessingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val items: ArrayList<HashMap<String, Any>> = ArrayList()
-        items.add(hashMapOf(Pair("text", "2020-2-7 21:59"), Pair("op", 1), Pair("progress", 45)))
-        items.add(hashMapOf(Pair("text", "2020-2-7 21:22"), Pair("op", 0), Pair("progress", 22)))
-        items.add(hashMapOf(Pair("text", "2020-2-7 22:22"), Pair("op", 1), Pair("progress", 67)))
-
+        val items: ArrayList<TaskItem> = ArrayList()
         initListener()
         binding.processingRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.processingRecyclerView.adapter = context?.let { ProcessingRecyclerAdapter(items, it) }
-
+        adapter = ProcessingRecyclerAdapter(items, context!!)
+        binding.processingRecyclerView.adapter = adapter
     }
 
     private fun initListener() {
@@ -70,5 +69,11 @@ class ProcessingFragment : Fragment() {
             intent.putExtra("Function", 6)
             startActivity(intent)
         }
+
+        (activity as? MainActivity)?.addOnProgressListener(this)
+    }
+
+    override fun onProgressUpdated(items: ArrayList<TaskItem>) {
+        adapter.onUpdate(items)
     }
 }

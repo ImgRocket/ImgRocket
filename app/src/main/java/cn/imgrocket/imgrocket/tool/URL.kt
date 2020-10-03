@@ -8,4 +8,5 @@ object URL {
     const val queryCodeUsageURL = "https://user.imgrocket.cn/code/query"
     const val trailCodeURL = "https://user.imgrocket.cn/code/trail"
     const val exchangeCodeURL = "https://user.imgrocket.cn/code/use"
+    const val taskListURL = "https://api.imgrocket.cn:18002/task/list/"
 }

@@ -26,7 +26,7 @@ import kotlin.reflect.KProperty
 @SuppressLint("SetTextI18n")
 class ExchangeActivity : AppCompatActivity() {
     private val global: APP by lazy { application as APP }
-    private var usage by Delegates.observable(Usage("", 0, 0)) { _, before, after ->
+    private var usage by Delegates.observable(Usage("", 0, 0)) { _, _, after ->
         exchange_text_balance.text = "总数${after.all}, 已使用${after.used}"
     }
 

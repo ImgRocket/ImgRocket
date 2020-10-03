@@ -4,26 +4,31 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.JsonReader
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.viewpager.widget.ViewPager
+import cn.imgrocket.imgrocket.ExchangeActivity.Companion.post
 import cn.imgrocket.imgrocket.adapter.SimplePageFragmentAdapter
 import cn.imgrocket.imgrocket.databinding.ActivityMainBinding
 import cn.imgrocket.imgrocket.room.AppDatabase
+import cn.imgrocket.imgrocket.room.model.TaskItem
 import cn.imgrocket.imgrocket.room.model.User
-import cn.imgrocket.imgrocket.tool.APP
+import cn.imgrocket.imgrocket.tool.*
 import cn.imgrocket.imgrocket.tool.APP.Companion.context
-import cn.imgrocket.imgrocket.tool.AvatarListener
 import cn.imgrocket.imgrocket.tool.Function.black
-import cn.imgrocket.imgrocket.tool.URL
-import cn.imgrocket.imgrocket.tool.UserStateChangeListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.EasyPermissions
 import java.io.File
 
@@ -62,9 +67,9 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
         global.userDao = global.database.userDao()
         global.user = global.userDao.loadUser()
         global.userData = global.userDao.autoUpdateLoadUser()
-        global.userData.observe(this, Observer {
+        global.userData.observe(this) {
             global.user = it
-        })
+        }
 
         global.addAvatarChangeListener(this)
         global.addOnUserStateChangeListener(this)
@@ -169,6 +174,8 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
         adapter = SimplePageFragmentAdapter(supportFragmentManager, arrayListOf(ProcessingFragment(), DoneFragment(), UserFragment()))
         binding.mainPageView.adapter = adapter
         binding.mainPageView.currentItem = 0
+
+        getProgress()
     }
 
     private fun needHelp(): Boolean {
@@ -180,6 +187,31 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
         changeSmallAvatar()
     }
 
+    private fun getProgress() {
+        val user = global.user
+        if (user == null) {
+            startActivity(Intent(this, LoginActivity::class.java)).also { finish() }
+            return
+        }
+
+        GlobalScope.launch {
+            post(URL.taskListURL, hashMapOf("userid" to user.uid, "usertoken" to user.token)) {
+                Log.d(javaClass.name, it)
+                val obj = JsonParser.parseString(it).asJsonObject
+                val tasks = ArrayList<TaskItem>()
+                obj["task"].asJsonArray.forEach { task ->
+                    val id = task.asJsonObject["id"].asString
+                    val token = task.asJsonObject["token"].asString
+                    val progress = task.asJsonObject["progress"].asInt
+                    tasks.add(TaskItem(id, token, progress))
+                }
+                runOnUiThread {
+                    mProgressListener.forEach { listener -> listener.onProgressUpdated(tasks) }
+                }
+            }
+        }
+    }
+
     override fun onUserChange(user: User?) {
         changeSmallAvatar()
     }
@@ -188,6 +220,7 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
         super.onDestroy()
         global.removeAvatarChangeListener(this)
         global.removeOnUserStateChangeListener(this)
+        mProgressListener.clear()
     }
 
     private fun changeSmallAvatar() {
@@ -206,6 +239,16 @@ class MainActivity : AppCompatActivity(), AvatarListener, UserStateChangeListene
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
 
+    }
+
+    interface OnProgressUpdateListener {
+        fun onProgressUpdated(items: ArrayList<TaskItem>)
+    }
+
+    private val mProgressListener: HashSet<OnProgressUpdateListener> = HashSet()
+
+    fun addOnProgressListener(listener: OnProgressUpdateListener) {
+        mProgressListener.add(listener)
     }
 
     private fun getPermission() {

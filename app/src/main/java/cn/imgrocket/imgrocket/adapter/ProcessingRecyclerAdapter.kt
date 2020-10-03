@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import cn.imgrocket.imgrocket.tool.Function
 import cn.imgrocket.imgrocket.R
+import cn.imgrocket.imgrocket.room.model.TaskItem
 
-class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, val context: Context) : RecyclerView.Adapter<ProcessingRecyclerAdapter.ViewHolder>() {
+class ProcessingRecyclerAdapter(private val items: ArrayList<TaskItem>, val context: Context) : RecyclerView.Adapter<ProcessingRecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_processing, parent, false)
@@ -24,35 +26,32 @@ class ProcessingRecyclerAdapter(private val items: List<HashMap<String, Any>>, v
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val opImg = arrayListOf<Drawable>(context.resources.getDrawable(R.drawable.ic_pause_black_24dp, null), context.resources.getDrawable(R.drawable.ic_play_arrow_black_24dp, null))
-        holder.op.setImageDrawable(opImg[items[position]["op"] as Int])
-        holder.text.text = items[position]["text"] as CharSequence?
-        //holder.icon.setImageBitmap(items[position]["icon"] as Bitmap?)
-        holder.progress.progress = (items[position]["progress"] as Int)
+        holder.text.text = items[position].id
+        holder.progress.progress = items[position].progress
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var text: TextView = itemView.findViewById(R.id.processing_item_text)
-        var icon: ImageView = itemView.findViewById(R.id.processing_item_icon)
-        var op: ImageView = itemView.findViewById(R.id.processing_item_op)
         var progress: ProgressBar = itemView.findViewById(R.id.processing_progress)
-
     }
 
     class OnClick : View.OnClickListener {
-
-        override fun onClick(v: View?) {
-            Function.toast(v!!.resources.getString(R.string.this_function_is_unavailable))
+        override fun onClick(v: View) {
+            Function.toast(v.resources.getString(R.string.this_function_is_unavailable))
         }
-
     }
 
     class OnLongClick : View.OnLongClickListener {
-        override fun onLongClick(v: View?): Boolean {
-            Function.toast(v!!.resources.getString(R.string.this_function_is_unavailable))
+        override fun onLongClick(v: View): Boolean {
+            Function.toast(v.resources.getString(R.string.this_function_is_unavailable))
             return true
         }
+    }
 
+    fun onUpdate(items: ArrayList<TaskItem>) {
+        this.items.clear()
+        this.items.addAll(items.filter { it.progress != 100 })
+        notifyDataSetChanged()
     }
 
 }
