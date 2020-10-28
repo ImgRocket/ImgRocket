@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                                     global.user = global.userDao.loadUser()
                                     toast("登陆成功")
                                     Log.d(javaClass.name, "LoginResult: ${it.uid} ${it.username} ${it.token}")
+                                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                     finish()
                                 }
                             }
